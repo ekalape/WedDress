@@ -1,18 +1,19 @@
 export enum dressLength {
-LONG, MEDIUM, SHORT
+LONG= "long",
+MEDIUM = "medium", SHORT = "short"
 }
 export enum dressComplex{
-    TWO_PIECES, THREE_PIECES
+    TWO_PIECES= "two pieces", THREE_PIECES = "three pieces"
 }
 export enum ties{
-    TIE, BOW, NOTHING
+    TIE = "with a classic tie", BOW = "with a bow tie", NOTHING = "without a tie"
 }
 
 export enum womanColors{
-    "WHITE","RED", "BLUE", "YELLOW"
+    WHITE = "white",RED= "red", BLUE="blue", YELLOW="yellow"
 }
 export enum manColors{
-    "WHITE","BLACK", "BLUE", "GRAY"
+    WHITE = "white",BLACK="black", BLUE="blue", GRAY="gray"
 }
 
 export interface ICartable{
@@ -25,10 +26,10 @@ export interface ICartable{
 
 
 export class Cloth{
-color:womanColors|manColors;
+color:womanColors|manColors|string;
 imageURL:string
     constructor(
-    color:womanColors|manColors, 
+    color:womanColors|manColors|string, 
     imageURL:string,
     ){
         this.color= color;
@@ -47,10 +48,10 @@ export class WomanCloth extends Cloth{
    _size: number[];
    popolarity: number;  
     sleeves:boolean;
-    length:dressLength;
+    length:dressLength|string;
   
 
-    constructor(color:womanColors, sleeves:boolean, length:dressLength, imageURL:string){
+    constructor(color:womanColors|string, sleeves:boolean, length:dressLength|string, imageURL:string){
         super(color,imageURL)
 
         this.sleeves= sleeves;
@@ -60,17 +61,17 @@ export class WomanCloth extends Cloth{
         this._size = this.setSize();
 
 
-        this.popolarity = this.setRandom(3,2)
+        this.popolarity = this.setRandom(4,2)
 
     }
 get price(): number {
     return this._price;
 }
 setSize():number[]{
-   const s =  [38,40, 42, 44, 46, 48, 50, 52,54];
+   const s =  [40, 42, 44, 46, 48, 50, 52];
    const arr:number[] = [];
-   for(let i =0; i<6; i++){
-      let n = s[this.setRandom(9)];
+   for(let i =0; i<5; i++){
+      let n = s[this.setRandom(7)];
       if(!arr.includes(n))
           arr.push(n)
      }
@@ -83,12 +84,13 @@ setSize():number[]{
     
 
     private setRandom(range:number, corr:number=0){
-        return Math.floor(Math.random()*range +corr)
+        return Math.floor((Math.random()*range) +corr)
     }
 
      override toString(){
         let sl:string = this.sleeves?"with sleeves": "without sleeves"
-        return `${this.color} women dress ${sl} {sizes: ${this.size}, length: ${this.length}, price: ${this.price}, popolarity: ${this.popolarity}}`
+        let color = this.color[0].toUpperCase()+this.color.slice(1)
+        return `${color} woman wedding dress ${sl} {available sizes: ${this.size}, ${this.length} length: , price: ${this.price}, popolarity: ${this.popolarity}}`
     }
 
 }
