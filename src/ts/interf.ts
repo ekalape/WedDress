@@ -1,118 +1,101 @@
-export enum dressLength {
-LONG= "long",
-MEDIUM = "medium", SHORT = "short"
-}
-export enum dressComplex{
-    TWO_PIECES= "two pieces", THREE_PIECES = "three pieces"
-}
-export enum ties{
-    TIE = "with a classic tie", BOW = "with a bow tie", NOTHING = "without a tie"
-}
-
-export enum womanColors{
-    WHITE = "white",RED= "red", BLUE="blue", YELLOW="yellow"
-}
-export enum manColors{
-    WHITE = "white",BLACK="black", BLUE="blue", GRAY="gray"
-}
-
-export interface ICartable{
-    width:number;
-    height:number;
-
-    drawCard:() => void
-    
-}
+import * as enums from "./enums"
 
 
-export class Cloth{
-color:womanColors|manColors|string;
-imageURL:string
-    constructor(
-    color:womanColors|manColors|string, 
-    imageURL:string,
-    ){
-        this.color= color;
+export interface ICartable {
+
+
+    drawCard: () => void;
+}
+
+type dressColors = enums.manColors| enums.womanColors|string
+
+export class Cloth {
+    color: dressColors;
+    imageURL: string;
+    _price: number;
+    size: number[];
+    popolarity: number;
+    constructor(color:dressColors, imageURL: string) {
+        this.color = color;
         this.imageURL = imageURL;
-    }
-
-    toString(){
-        
-    }
-
-}
-
-
-export class WomanCloth extends Cloth{  
-   _price: number;
-   _size: number[];
-   popolarity: number;  
-    sleeves:boolean;
-    length:dressLength|string;
-  
-
-    constructor(color:womanColors|string, sleeves:boolean, length:dressLength|string, imageURL:string){
-        super(color,imageURL)
-
-        this.sleeves= sleeves;
-        this.length= length;
-
         this._price = this.setRandom(1500, 1000);
-        this._size = this.setSize();
-
-
-        this.popolarity = this.setRandom(4,2)
-
+        this.size = this.setSize([[46,48], 2]);
+        this.popolarity = this.setRandom(4, 2);
     }
-get price(): number {
-    return this._price;
+    get price(): number {
+        return this._price;
+    }
+/*  static refColor(c:string, gender:string){
+if(gender === "w")
+return Object.entries(enums.womanColors).filter(x=>x[1]===c)[0][0]
+else return Object.entries(enums.manColors).filter(x=>x[1]===c)[0][0]
 }
-setSize():number[]{
-   const s =  [40, 42, 44, 46, 48, 50, 52];
-   const arr:number[] = [];
-   for(let i =0; i<5; i++){
-      let n = s[this.setRandom(7)];
-      if(!arr.includes(n))
-          arr.push(n)
-     }
-     return arr;
+ */
+    setSize(a:[number[],number]): number[] {
+        const s = a[0];
+        const q = a[1]
+        const arr: number[] = [];
+        for (let i = 0; i < q; i++) {
+            let n = s[this.setRandom(s.length)];
+            if (!arr.includes(n)) arr.push(n);
+        }
+        return arr.sort((a,b)=>a-b);
     }
-    get size():number[]{
-         return this._size;
-    }
-
-    
-
-    private setRandom(range:number, corr:number=0){
-        return Math.floor((Math.random()*range) +corr)
+    private setRandom(range: number, corr: number = 0) {
+        return Math.floor(Math.random() * range + corr);
     }
 
-     override toString(){
-        let sl:string = this.sleeves?"with sleeves": "without sleeves"
-        let color = this.color[0].toUpperCase()+this.color.slice(1)
-        return `${color} woman wedding dress ${sl} {available sizes: ${this.size}, ${this.length} length: , price: ${this.price}, popolarity: ${this.popolarity}}`
-    }
-
+    toString() { }
 }
 
+export class WomanCloth extends Cloth {
+    sleeves: boolean;
+    length: enums.dressLength|string ;
 
 
-export class shCart{
-   private items:Cloth[]= [];
-
-    constructor(){
+    constructor(
+        color: enums.womanColors | string,
+        sleeves: boolean,
+        length: enums.dressLength|string,
+        imageURL: string
+    ) {
+        super(color, imageURL);
+        this.sleeves = sleeves;
+        this.length = length;
+        this.size =this.setSize([[38,40,42,44,46,48,50,52,54], 5]);
     }
 
-    setItem(item:Cloth){
-        if(this.items.length<20)
-        this.items.push(item)
-
-        else console.log("Your shopping cart is full!")
-    }
-    getItems(){
-        if(this.items.length===0) console.log( "There is nothing yet")
-        else {
-            this.items.forEach((i:Cloth)=>console.log(i.toString()))
-        }       
+    override toString() {
+        let sl: string = this.sleeves ? 'with sleeves' : 'without sleeves';
+        let color = this.color[0].toUpperCase() + this.color.slice(1);
+        return `${color} ${this.length} woman wedding dress ${sl} \nAvailable sizes: ${this.size},\nprice: ${this.price}$, popolarity: ${this.popolarity}`;
     }
 }
+
+
+export class ManCloth extends Cloth {
+    tie: enums.ties;
+    complexity: enums.dressComplex|number;
+
+    constructor(
+        color: enums.manColors | string, 
+        complexity:enums.dressComplex|number,
+        tie:enums.ties|string,
+        imageURL: string
+    ) {
+        super(color, imageURL);
+         this.size =this.setSize([[42,44,46,48,50,52,54, 56, 58], 5]);
+         this.tie = Object.entries(enums.manColors).filter(x=>x[1]===tie)[0][0] as enums.ties;
+         this.complexity =complexity;
+    }
+
+    override toString() {
+        let t: string = this.tie ===enums.ties.TIE ? 'with a classic tie' 
+        :this.tie ===enums.ties.BOW ? 'with a bow tie'
+        : 'without a tie';
+        let compl = this.complexity===2? "two pieces" : this.complexity===3? "three pieces" : "one piece"
+        let color = this.color[0].toUpperCase() + this.color.slice(1);
+        return `${color} ${compl} man wedding dress ${t} \nAvailable sizes: ${this.size},\nprice: ${this.price}$, popolarity: ${this.popolarity}`;
+    }
+}
+
