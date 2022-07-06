@@ -74,7 +74,7 @@ export class WomanCloth extends Cloth {
 
 
 export class ManCloth extends Cloth {
-    tie: enums.ties;
+    tie: enums.ties|string;
     complexity: enums.dressComplex|number;
 
     constructor(
@@ -85,13 +85,13 @@ export class ManCloth extends Cloth {
     ) {
         super(color, imageURL);
          this.size =this.setSize([[42,44,46,48,50,52,54, 56, 58], 5]);
-         this.tie = Object.entries(enums.manColors).filter(x=>x[1]===tie)[0][0] as enums.ties;
+         this.tie = tie;
          this.complexity =complexity;
     }
 
     override toString() {
-        let t: string = this.tie ===enums.ties.TIE ? 'with a classic tie' 
-        :this.tie ===enums.ties.BOW ? 'with a bow tie'
+        let t: string = this.tie === "tie" ? 'with a classic tie' 
+        :this.tie ==="bow" ? 'with a bow tie'
         : 'without a tie';
         let compl = this.complexity===2? "two pieces" : this.complexity===3? "three pieces" : "one piece"
         let color = this.color[0].toUpperCase() + this.color.slice(1);
