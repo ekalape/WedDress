@@ -50,7 +50,7 @@ module.exports = ({ develop }) => ({
         extensions: [".ts", ".js"]
     },
     plugins: [
-        new HtmlWebpackPlugin({ title: "Wedding dress shop", template: "./src/wDress-card.html" }),
+        new HtmlWebpackPlugin({ title: "Wedding dress shop" /* , template: "./src/wDress-card.html" */ }),
 
         new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })
     ],
