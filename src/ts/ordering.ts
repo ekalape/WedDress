@@ -84,7 +84,7 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
 
     }
 
-    result.forEach(x => console.log(x.toString()))
+    result.forEach(x => document.body.append(x.createCard()))
 
 }
 

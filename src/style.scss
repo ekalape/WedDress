@@ -19,7 +19,7 @@ body {
     width: 280px;
     height: 400px;
     background-color: white;
-    border-radius: 10%;
+    border-radius: 5%;
     border: 0.2rem solid black;
     box-shadow: 0.5rem 0.5rem white, -0.5rem -0.5rem white, 0.5rem -0.5rem white, -0.5rem 0.5rem white, 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072);
     display: flex;
@@ -27,26 +27,22 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    padding-top: 20px;
-}
-
-.card__title {
-    font-size: 24px;
+    padding-top: 12px;
 }
 
 .card__image {
     width: 90%;
     height: 50%;
     overflow: hidden;
-    border-radius: 10%;
+    border-radius: 5%;
     position: relative;
-}
-
-.card__image img {
-    width: 100%;
-    position: relative;
-    top: -20%;
-    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: -30%;
 }
 
 .card__description {

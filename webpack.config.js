@@ -6,9 +6,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const devServer = (isDev) => !isDev ? {} : {
     devServer: {
+
         open: true,
         hot: true,
         port: 5501,
+        static: './',
 
     }
 }
@@ -16,6 +18,8 @@ const devServer = (isDev) => !isDev ? {} : {
 module.exports = ({ develop }) => ({
     mode: develop ? "development" : "production",
     devtool: develop ? "inline-source-map" : false,
+
+    ...devServer(develop),
     entry: './src/ts/main.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -29,7 +33,7 @@ module.exports = ({ develop }) => ({
                 exclude: /node_modules/,
             },
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+                test: /\.(?:ico|gif|png|jpg|jpeg|svg|json)$/i,
                 type: "asset/resource",
             },
             {
@@ -55,6 +59,6 @@ module.exports = ({ develop }) => ({
         new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })
     ],
 
-    ...devServer(develop)
+
 
 });

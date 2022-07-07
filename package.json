@@ -2,7 +2,8 @@
     "name": "wedding-dress-store",
     "scripts": {
         "build": "webpack",
-        "dev": "webpack server --env develop"
+        "dev": "webpack serve --env develop",
+        "watch": "webpack --watch"
     },
     "devDependencies": {
         "clean-webpack-plugin": "^4.0.0",

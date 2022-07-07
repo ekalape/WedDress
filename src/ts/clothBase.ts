@@ -41,8 +41,7 @@ export class Cloth {
 
     createCard() {
         const card: HTMLElement = document.createElement("div");
-        const cardImage: HTMLElement = document.createElement("div");
-        const cardImageFoto: HTMLImageElement = document.createElement("img");
+        const cardImage: HTMLElement = document.createElement("div");  
         const cardDescription: HTMLParagraphElement = document.createElement("div");
         const cardPopolarity: HTMLElement = this.starsCreator(this.popolarity);
 
@@ -51,12 +50,9 @@ export class Cloth {
         cardDescription.classList.add("card__description");
         cardPopolarity.classList.add("popolarity");
 
-
+cardImage.style.backgroundImage = `url(${this.imageURL})`;
         cardDescription.textContent = this.toString()
-        cardImageFoto.src = this.imageURL;
 
-
-        cardImage.append(cardImageFoto);
         card.append(cardImage, cardDescription, cardPopolarity);
 
         return card;
