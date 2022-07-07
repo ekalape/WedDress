@@ -26,3 +26,8 @@ export enum manColors {
     GRAY = 'gray',
 }
 export type dressColors = manColors | womanColors | string
+
+
+export enum ordering{
+    "SHAFFLE", "PRICE_UP","PRICE_DOWN", "POPOLARITY_UP", "POPOLARITY_DOWN"
+}

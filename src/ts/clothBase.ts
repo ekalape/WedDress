@@ -10,6 +10,7 @@ export class Cloth {
     _price: number;
     size: number[];
     popolarity: number;
+    gender="";
     constructor(color: enums.dressColors, imageURL: string) {
         this.color = color;
         this.imageURL = imageURL;
@@ -107,7 +108,7 @@ export class WomanCloth extends Cloth {
 export class ManCloth extends Cloth {
     tie: enums.ties | string;
     complexity: enums.dressComplex | number;
-    gender:string = "Man "
+    gender:string = "Man"
 
     constructor(
         color: enums.manColors | string,

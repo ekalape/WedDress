@@ -18,10 +18,11 @@ type mDress = {
     tie: string;
 }
 
+
 export async function createDatabase(): Promise<cloth.Cloth[]> {
     const responseW = await fetch("/src/database/woman.json");
     const womenArray: wDress[] = await responseW.json();
-    console.log(womenArray);
+    //console.log(womenArray);
 
 
     const responseM = await fetch("/src/database/man.json")
@@ -37,6 +38,8 @@ export async function createDatabase(): Promise<cloth.Cloth[]> {
     for (let i of womenArray) {
         database.push(new cloth.WomanCloth(i.color, i.sleeves, i.length, i.imageURL))
     }
+   
+    
     return database;
 }
 
