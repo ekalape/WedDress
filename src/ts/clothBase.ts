@@ -1,24 +1,19 @@
 import * as enums from "./enums"
 
 
-export interface ICartable {
 
 
-    drawCard: () => void;
-}
-
-type dressColors = enums.manColors | enums.womanColors | string
 
 export class Cloth {
-    color: dressColors;
+    color: enums.dressColors;
     imageURL: string;
     _price: number;
     size: number[];
     popolarity: number;
-    constructor(color: dressColors, imageURL: string) {
+    constructor(color: enums.dressColors, imageURL: string) {
         this.color = color;
         this.imageURL = imageURL;
-        this._price = this.setRandom(1500, 1000);
+        this._price = this.setRandom(2500, 1000);
         this.size = this.setSize([[46, 48], 2]);
         this.popolarity = this.setRandom(4, 2);
     }
@@ -67,10 +62,8 @@ export class Cloth {
     }
 
     private starsCreator(stars: number): HTMLElement {
-        const cont = document.createElement("div");
-  
+        const cont = document.createElement("div");  
         const validStar: string = '<img src="../src/assets/star_black.png" alt="star">';
-
         const notStar: string = '<img src="../src/assets/star_gray.png" alt="lack of star">';
 
       let st =""
@@ -89,6 +82,7 @@ export class Cloth {
 export class WomanCloth extends Cloth {
     sleeves: boolean;
     length: enums.dressLength | string;
+    gender:string = "Woman"
 
 
     constructor(
@@ -100,7 +94,7 @@ export class WomanCloth extends Cloth {
         super(color, imageURL);
         this.sleeves = sleeves;
         this.length = length;
-        this.size = this.setSize([[38, 40, 42, 44, 46, 48, 50, 52, 54], 5]);
+        this.size = this.setSize([[38, 40, 42, 44, 46, 48, 50, 52, 54], 3]);
     }
 
     override toString() {
@@ -113,6 +107,7 @@ export class WomanCloth extends Cloth {
 export class ManCloth extends Cloth {
     tie: enums.ties | string;
     complexity: enums.dressComplex | number;
+    gender:string = "Man "
 
     constructor(
         color: enums.manColors | string,
@@ -121,7 +116,7 @@ export class ManCloth extends Cloth {
         imageURL: string
     ) {
         super(color, imageURL);
-        this.size = this.setSize([[42, 44, 46, 48, 50, 52, 54, 56, 58], 5]);
+        this.size = this.setSize([[42, 44, 46, 48, 50, 52, 54, 56, 58], 3]);
         this.tie = tie;
         this.complexity = complexity;
     }

@@ -25,3 +25,4 @@ export enum manColors {
     BLUE = 'blue',
     GRAY = 'gray',
 }
+export type dressColors = manColors | womanColors | string
