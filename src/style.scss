@@ -7,17 +7,26 @@
 body {
     width: 100vw;
     height: 100vh;
-    background-color: rgb(65, 43, 43);
+    background-color: rgb(175, 175, 175);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
     gap: 40px;
+    z-index: 1;
+}
+
+main {
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .card {
-    width: 280px;
-    height: 400px;
+    width: 200px;
+    height: 300px;
     background-color: white;
     border-radius: 5%;
     border: 0.2rem solid black;
@@ -26,8 +35,19 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
     padding-top: 12px;
+    &:hover {
+        cursor: pointer;
+        border-color: #F39200;
+        transform: scale(1.02);
+        .popolarity .valStar {
+            filter: invert(69%) sepia(42%) saturate(4731%) hue-rotate(1deg) brightness(96%) contrast(104%);
+        }
+    }
+}
+
+.hiddenID {
+    display: none;
 }
 
 .card__image {
@@ -39,17 +59,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid black;
+    border: 3px solid rgb(179, 179, 179);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: -30%;
 }
 
 .card__description {
-    width: 90%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 14px;
 }
 
 .card li {
@@ -57,14 +78,30 @@ body {
 }
 
 .popolarity {
-    width: 200px;
-    height: 30px;
-    margin: 30px auto;
+    width: 180px;
+    height: 20px;
+    margin: 10px auto;
     display: flex;
     justify-content: space-evenly;
 }
 
 .popolarity img {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+}
+
+.card-container {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.card_big {
+    width: 50vw;
+    height: 50vh;
+    margin: auto;
+    background-color: white;
+    position: fixed;
+    z-index: 4;
 }

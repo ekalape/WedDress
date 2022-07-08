@@ -11,12 +11,14 @@ export class Cloth {
     size: number[];
     popolarity: number;
     gender="";
-    constructor(color: enums.dressColors, imageURL: string) {
+    hiddenID:string;
+    constructor(color: enums.dressColors, imageURL: string, hiddenID:string) {
         this.color = color;
         this.imageURL = imageURL;
         this._price = this.setRandom(2500, 1000);
         this.size = this.setSize([[46, 48], 2]);
         this.popolarity = this.setRandom(4, 2);
+        this.hiddenID = hiddenID
     }
     get price(): number {
         return this._price;
@@ -44,13 +46,17 @@ export class Cloth {
         const cardImage: HTMLElement = document.createElement("div");  
         const cardDescription: HTMLParagraphElement = document.createElement("div");
         const cardPopolarity: HTMLElement = this.starsCreator(this.popolarity);
+    
+        cardDescription.dataset["hid"] = this.hiddenID.toString();
+
 
         card.classList.add("card");
         cardImage.classList.add("card__image");
         cardDescription.classList.add("card__description");
         cardPopolarity.classList.add("popolarity");
 
-cardImage.style.backgroundImage = `url(${this.imageURL})`;
+
+        cardImage.style.backgroundImage = `url(${this.imageURL})`;
         cardDescription.textContent = this.toString()
 
         card.append(cardImage, cardDescription, cardPopolarity);
@@ -60,7 +66,7 @@ cardImage.style.backgroundImage = `url(${this.imageURL})`;
 
     private starsCreator(stars: number): HTMLElement {
         const cont = document.createElement("div");  
-        const validStar: string = '<img src="../src/assets/star_black.png" alt="star">';
+        const validStar: string = '<img src="../src/assets/star_black.png" alt="star" class="valStar">';
         const notStar: string = '<img src="../src/assets/star_gray.png" alt="lack of star">';
 
       let st =""
@@ -74,6 +80,21 @@ cardImage.style.backgroundImage = `url(${this.imageURL})`;
         cont.innerHTML = st;
         return cont;
     }
+
+    createModalCard(){
+        const cardModal:HTMLElement = document.createElement("div");
+        cardModal.classList.add("card_modal");
+    
+        const cardImage: HTMLElement = document.createElement("div"); 
+        cardImage.classList.add("card__image_modal")
+        cardImage.style.backgroundImage = `url(${this.imageURL})`;
+
+        const title:HTMLHeadingElement = document.createElement("h4");
+        title.classList.add("modal_title")
+
+        const list:HTMLElement = document.createElement("ul"); 
+       
+    }
 }
 
 export class WomanCloth extends Cloth {
@@ -86,9 +107,10 @@ export class WomanCloth extends Cloth {
         color: enums.womanColors | string,
         sleeves: boolean,
         length: enums.dressLength | string,
-        imageURL: string
+        imageURL: string,
+        hiddenID:string
     ) {
-        super(color, imageURL);
+        super(color, imageURL, hiddenID);
         this.sleeves = sleeves;
         this.length = length;
         this.size = this.setSize([[38, 40, 42, 44, 46, 48, 50, 52, 54], 3]);
@@ -110,9 +132,10 @@ export class ManCloth extends Cloth {
         color: enums.manColors | string,
         complexity: enums.dressComplex | number,
         tie: enums.ties | string,
-        imageURL: string
+        imageURL: string,
+        hiddenID:string
     ) {
-        super(color, imageURL);
+        super(color, imageURL, hiddenID);
         this.size = this.setSize([[42, 44, 46, 48, 50, 52, 54, 56, 58], 3]);
         this.tie = tie;
         this.complexity = complexity;

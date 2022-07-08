@@ -21,6 +21,8 @@ export type filter = {
 
 
 
+
+
 export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
     const database = array ?? await createDatabase();
     let minSize = filters.minSize ?? 0;
@@ -84,8 +86,18 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
 
     }
 
-    result.forEach(x => document.body.append(x.createCard()))
+/*     result.forEach(x => {
+        const c = x.createCard();
+      c.addEventListener('click', (event) => {
+        let tar = event.currentTarget as HTMLElement
+       console.log(tar)
+       let descr =tar.children[1] as HTMLElement;
+     console.log(descr.dataset["hid"])
 
+      })
+        document.querySelector<HTMLElement>(".container")?.append(c);
+}) */
+return result;
 }
 
 function isWomanCloth(d: cloth.Cloth): d is cloth.WomanCloth {

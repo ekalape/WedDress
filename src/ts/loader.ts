@@ -9,21 +9,21 @@ type wDress = {
     color: enums.womanColors | string,
     imageURL: string,
     sleeves: boolean,
-    length: string
+    length: string,
+    hiddenID:string
 }
 type mDress = {
     color: enums.womanColors | string,
     imageURL: string,
     complexity: number,
-    tie: string;
+    tie: string,
+    hiddenID:string
 }
-
+export const db = createDatabase()
 
 export async function createDatabase(): Promise<cloth.Cloth[]> {
     const responseW = await fetch("/src/database/woman.json");
     const womenArray: wDress[] = await responseW.json();
-    //console.log(womenArray);
-
 
     const responseM = await fetch("/src/database/man.json")
     const menArray: mDress[] = await responseM.json()
@@ -31,12 +31,11 @@ export async function createDatabase(): Promise<cloth.Cloth[]> {
     const database: cloth.Cloth[] = [];
 
     for (let i of menArray) {
-        //const manDressItem = new cloth.ManCloth(i.color, i.complexity, i.tie, i.imageURL);
-        //document.body.append(manDressItem.createCard());   
-        database.push(new cloth.ManCloth(i.color, i.complexity, i.tie, i.imageURL));
+     
+        database.push(new cloth.ManCloth(i.color, i.complexity, i.tie, i.imageURL,i.hiddenID));
     }
     for (let i of womenArray) {
-        database.push(new cloth.WomanCloth(i.color, i.sleeves, i.length, i.imageURL))
+        database.push(new cloth.WomanCloth(i.color, i.sleeves, i.length, i.imageURL, i.hiddenID))
     }
    
     
