@@ -9,15 +9,15 @@ export class Cloth {
     imageURL: string;
     _price: number;
     size: number[];
-    popolarity: number;
-    gender="";
-    hiddenID:string;
-    constructor(color: enums.dressColors, imageURL: string, hiddenID:string) {
+    popularity: number;
+    gender = "";
+    hiddenID: string;
+    constructor(color: enums.dressColors, imageURL: string, hiddenID: string) {
         this.color = color;
         this.imageURL = imageURL;
         this._price = this.setRandom(2500, 1000);
         this.size = this.setSize([[46, 48], 2]);
-        this.popolarity = this.setRandom(4, 2);
+        this.popularity = this.setRandom(4, 2);
         this.hiddenID = hiddenID
     }
     get price(): number {
@@ -38,69 +38,105 @@ export class Cloth {
         return Math.floor(Math.random() * range + corr);
     }
 
-    toString() { return "default cloth" }
+    toString(): string[] {
+
+
+        return ["default cloth"]
+    }
 
 
     createCard() {
         const card: HTMLElement = document.createElement("div");
-        const cardImage: HTMLElement = document.createElement("div");  
+        const cardImage: HTMLElement = document.createElement("div");
         const cardDescription: HTMLParagraphElement = document.createElement("div");
-        const cardPopolarity: HTMLElement = this.starsCreator(this.popolarity);
-    
+        const cardPopularity: HTMLElement = this.starsCreator(this.popularity);
+
         cardDescription.dataset["hid"] = this.hiddenID.toString();
 
 
         card.classList.add("card");
         cardImage.classList.add("card__image");
         cardDescription.classList.add("card__description");
-        cardPopolarity.classList.add("popolarity");
+        cardPopularity.classList.add("popolarity");
 
 
         cardImage.style.backgroundImage = `url(${this.imageURL})`;
-        cardDescription.textContent = this.toString()
 
-        card.append(cardImage, cardDescription, cardPopolarity);
+        this.toString().forEach((x, i) => {
+            if(i<3){
+                const litem: HTMLElement = document.createElement("p"); // add CSS formatting
+
+                litem.textContent = x;
+                cardDescription.append(litem)
+            }
+          
+        })
+
+        card.append(cardImage, cardDescription, cardPopularity);
 
         return card;
     }
 
     private starsCreator(stars: number): HTMLElement {
-        const cont = document.createElement("div");  
+        const cont = document.createElement("div");
+        cont.title = `Popularity rating: ${stars} stars`
         const validStar: string = '<img src="../src/assets/star_black.png" alt="star" class="valStar">';
         const notStar: string = '<img src="../src/assets/star_gray.png" alt="lack of star">';
 
-      let st =""
+        let st = ""
 
         for (let i = 0; i < stars; i++) {
-            st+=validStar;
+            st += validStar;
         }
         for (let i = 0; i < 5 - stars; i++) {
-            st+=notStar;
+            st += notStar;
         }
         cont.innerHTML = st;
         return cont;
     }
 
-    createModalCard(){
-        const cardModal:HTMLElement = document.createElement("div");
+    createModalCard():HTMLElement {
+        const cardModal: HTMLElement = document.createElement("div");
         cardModal.classList.add("card_modal");
-    
-        const cardImage: HTMLElement = document.createElement("div"); 
+
+        const cardImage: HTMLElement = document.createElement("div");
         cardImage.classList.add("card__image_modal")
         cardImage.style.backgroundImage = `url(${this.imageURL})`;
 
-        const title:HTMLHeadingElement = document.createElement("h4");
+        const title: HTMLHeadingElement = document.createElement("h4");
         title.classList.add("modal_title")
+        title.textContent = `${this.gender} wedding dress`
 
-        const list:HTMLElement = document.createElement("ul"); 
-       
+        const list: HTMLElement = document.createElement("ul");
+        list.classList.add("modal_list")
+
+        const descrPr = Object.keys(this).filter(x => !["_price", "gender", "hiddenID", "imageURL", "popolarity"].includes(x)).sort((a, b) => this.comparator(a, b));
+        console.log(descrPr);
+
+        this.toString().forEach(x => {
+            const litem: HTMLElement = document.createElement("li");
+            litem.classList.add("modal_list__item");
+            litem.textContent = x;
+        })
+        return cardModal;
+    }
+
+
+
+    private comparator(a: string, b: string) {
+        if (b === "color") return 1
+        if (b === "size") return -1
+        if (a === "complexity" && b === "tie") return -1
+        if (a === "length" && b === "sleeves") return -1
+
+        else return 0
     }
 }
 
 export class WomanCloth extends Cloth {
     sleeves: boolean;
     length: enums.dressLength | string;
-    gender:string = "Woman"
+    gender: string = "Woman"
 
 
     constructor(
@@ -108,7 +144,7 @@ export class WomanCloth extends Cloth {
         sleeves: boolean,
         length: enums.dressLength | string,
         imageURL: string,
-        hiddenID:string
+        hiddenID: string
     ) {
         super(color, imageURL, hiddenID);
         this.sleeves = sleeves;
@@ -116,24 +152,43 @@ export class WomanCloth extends Cloth {
         this.size = this.setSize([[38, 40, 42, 44, 46, 48, 50, 52, 54], 3]);
     }
 
-    override toString() {
-        let sl: string = this.sleeves ? 'with sleeves' : 'without sleeves';
+    override toString(): string[] {
+        let sl: string = this.propertyToString("sleeves")
         let color = this.color[0].toUpperCase() + this.color.slice(1);
-        return `${color} ${this.length} woman wedding dress ${sl} \nAvailable sizes: ${this.size},\nprice: ${this.price}$`;
+        return [`${this.length[0].toUpperCase() + this.length.slice(1)} dress ${sl}`,"", `Color: ${color}`, `${this.propertyToString("size")}`, `Price: ${this.price}$`]
+
+
+
+    }
+    propertyToString(prop: string) {
+        let result = "";
+        if (prop === "sleeves") {
+            this.sleeves ? result = "with sleeves" : result = "without sleeves"
+        }
+        if (prop === "length") {
+            result = `${this.length[0].toUpperCase() + this.length.slice(1)} length`
+        }
+        if (prop === "size") {
+            result = `Available sizes: ${this.size.join(", ")}`
+        }
+        if (prop === "color") {
+            result = `Color: ${this.color}`
+        }
+        return result;
     }
 }
 
 export class ManCloth extends Cloth {
     tie: enums.ties | string;
     complexity: enums.dressComplex | number;
-    gender:string = "Man"
+    gender: string = "Man"
 
     constructor(
         color: enums.manColors | string,
         complexity: enums.dressComplex | number,
         tie: enums.ties | string,
         imageURL: string,
-        hiddenID:string
+        hiddenID: string
     ) {
         super(color, imageURL, hiddenID);
         this.size = this.setSize([[42, 44, 46, 48, 50, 52, 54, 56, 58], 3]);
@@ -141,13 +196,30 @@ export class ManCloth extends Cloth {
         this.complexity = complexity;
     }
 
-    override toString() {
-        let t: string = this.tie === "tie" ? 'with a classic tie'
-            : this.tie === "bow" ? 'with a bow tie'
-                : 'without a tie';
-        let compl = this.complexity === 2 ? "two pieces" : this.complexity === 3 ? "three pieces" : "one piece"
+    override toString(): string[] {
+        let t: string = this.propertyToString("tie")
         let color = this.color[0].toUpperCase() + this.color.slice(1);
-        return `${color} ${compl} man wedding dress ${t} \nAvailable sizes: ${this.size},\nprice: ${this.price}$`;
+        return [`${this.propertyToString("complexity")}`,`${t}`, `Color: ${color}`, `${this.propertyToString("size")}`, `Price: ${this.price}$`]
     }
+
+    propertyToString(prop: string) {
+        let result = "";
+        if (prop === "complexity") {
+            this.complexity === 2 ? result = "Two pieces suit" : this.complexity === 3 ? result = "Three pieces suit" : result = "One piece suit"
+        }
+        if (prop === "tie") {
+            this.tie === enums.ties.BOW ? result = 'with a bow tie' : this.tie === enums.ties.TIE ? result = 'with a classic tie' : result = 'without a tie'
+        }
+        if (prop === "size") {
+            result = `Available sizes: ${this.size.join(", ")}`
+        }
+        if (prop === "color") {
+            result = `Color: ${this.color}`
+        }
+
+
+        return result;
+    }
+
 }
 

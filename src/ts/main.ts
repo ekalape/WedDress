@@ -38,9 +38,12 @@ cardContainer?.addEventListener("click", (event)=>{
         hid = descr.dataset["hid"]||""
         let item = baseData.filter(x=>x.hiddenID===hid);
         console.log(item[0]);
+        console.log(Object.keys(item[0]));
+        item[0].createModalCard()
+       // Object.keys(item[0])
         
-        
-        if(item) createModalWindow(item[0])
+       if(item) {const m =createModalWindow(item[0]);
+    document.body.prepend(m)}
     }
     
     
@@ -49,19 +52,25 @@ cardContainer?.addEventListener("click", (event)=>{
 }
 start()
 
-function createModalWindow(ourCard:Cloth){
+function createModalWindow(ourCard:Cloth):HTMLElement{
 
     const bg = document.createElement("div");
     bg.classList.add("modal-bg");
 
-    const cardModal = document.createElement("div");
-    cardModal.classList.add("card_modal");
+    const cardModal = ourCard.createModalCard();
+     const closeBtn = document.createElement("button");
+     const closeImg = document.createElement("img");
+     closeImg.src = "assets/close_black.png"
+     closeImg.alt = "Close button"
+     closeImg.title = "Close"
+     closeBtn.classList.add("closeBtn")
+     closeBtn.append(closeImg);
+     closeBtn.addEventListener("click", ()=>bg.remove())
+     cardModal.append(closeBtn);
+bg.append(cardModal);
 
-    const cardImage: HTMLElement = document.createElement("div"); 
-    cardImage.classList.add("card__image_modal")
 
-
-
+return bg;
 
 }
 

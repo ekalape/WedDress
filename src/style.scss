@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Basic&family=Josefin+Slab:wght@500;700&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+:root {
+    --f-primary: 500 20px/30px 'Basic', sans-serif;
+    --f-primary-bold: 700 20px/30px 'Basic', sans-serif;
+    --f-secondary: 400 15px/18px 'Josefin Slab', serif;
 }
 
 body {
@@ -30,15 +37,16 @@ main {
     background-color: white;
     border-radius: 5%;
     border: 0.2rem solid black;
-    box-shadow: 0.5rem 0.5rem white, -0.5rem -0.5rem white, 0.5rem -0.5rem white, -0.5rem 0.5rem white, 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072);
+    box-shadow: 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072);
+    outline: 12px solid white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding-top: 12px;
+    transition: 0.3s;
     &:hover {
         cursor: pointer;
-        border-color: #F39200;
+        border-color: #9e5400;
         transform: scale(1.02);
         .popolarity .valStar {
             filter: invert(69%) sepia(42%) saturate(4731%) hue-rotate(1deg) brightness(96%) contrast(104%);
@@ -51,26 +59,30 @@ main {
 }
 
 .card__image {
-    width: 90%;
-    height: 50%;
+    width: 100%;
+    height: 60%;
     overflow: hidden;
     border-radius: 5%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid rgb(179, 179, 179);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: -30%;
+    box-shadow: inset 4px 4px 8px 2px white, inset -4px -4px 8px 2px white;
 }
 
 .card__description {
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 14px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+    font: var(--f-secondary)
 }
 
 .card li {
@@ -97,11 +109,47 @@ main {
     gap: 40px;
 }
 
-.card_big {
-    width: 50vw;
-    height: 50vh;
-    margin: auto;
-    background-color: white;
+.modal-bg {
+    width: 100vw;
+    height: 100vh;
     position: fixed;
-    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 5;
+}
+
+.closeBtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid black;
+    outline: 8px solid white;
+    position: absolute;
+    z-index: 7;
+    top: -25px;
+    right: -25px;
+    & img {
+        display: block;
+        width: 84%;
+        height: 84%;
+        margin: auto;
+    }
+    &:hover img {
+        /*   filter: drop-shadow(3px 3px 3px #9e5400); */
+        filter: invert(69%) sepia(42%) saturate(4731%) hue-rotate(1deg) brightness(96%) contrast(104%);
+    }
+}
+
+.card_modal {
+    width: 60%;
+    height: 50%;
+    position: relative;
+    z-index: 6;
+    display: flex;
+    border-radius: 3%;
+    border: 0.2rem solid black;
+    outline: 12px solid white;
+    background-color: white;
 }

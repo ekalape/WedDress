@@ -58,7 +58,7 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
 
 
     result = result.filter(x => (x.price >= minPrice && x.price <= maxPrice))
-    result = result.filter(x => (x.popolarity >= minPop && x.popolarity <= maxPop))
+    result = result.filter(x => (x.popularity >= minPop && x.popularity <= maxPop))
     result = result.filter(x => (x.size.some(s => s >= minSize && s <= maxSize)))
 
 
@@ -72,11 +72,11 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
             case enums.ordering.PRICE_DOWN:
                 result.sort((a, b) => b.price - a.price);
                 break;
-            case enums.ordering.POPOLARITY_DOWN:
-                result.sort((a, b) => b.popolarity - a.popolarity);
+            case enums.ordering.POPULARITY_DOWN:
+                result.sort((a, b) => b.popularity - a.popularity);
                 break;
-            case enums.ordering.POPOLARITY_UP:
-                result.sort((a, b) => a.popolarity - b.popolarity);
+            case enums.ordering.POPULARITY_UP:
+                result.sort((a, b) => a.popularity - b.popularity);
                 break;
 
 
@@ -86,17 +86,6 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
 
     }
 
-/*     result.forEach(x => {
-        const c = x.createCard();
-      c.addEventListener('click', (event) => {
-        let tar = event.currentTarget as HTMLElement
-       console.log(tar)
-       let descr =tar.children[1] as HTMLElement;
-     console.log(descr.dataset["hid"])
-
-      })
-        document.querySelector<HTMLElement>(".container")?.append(c);
-}) */
 return result;
 }
 
