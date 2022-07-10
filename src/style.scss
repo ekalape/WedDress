@@ -9,6 +9,8 @@
     --f-primary: 500 20px/30px 'Basic', sans-serif;
     --f-primary-bold: 700 20px/30px 'Basic', sans-serif;
     --f-secondary: 400 15px/18px 'Josefin Slab', serif;
+    --c-accent: #9e5400;
+    --filter-accent: invert(69%) sepia(42%) saturate(4731%) hue-rotate(1deg) brightness(96%) contrast(104%);
 }
 
 body {
@@ -21,6 +23,79 @@ body {
     align-items: center;
     gap: 40px;
     z-index: 1;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    border-bottom: 0.2rem solid black;
+    outline: 10px solid white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 7%;
+    img {
+        display: block;
+        height: 90%;
+        width: auto;
+        cursor: pointer;
+    }
+    .genderBtn_container {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90%;
+        gap: 10%;
+    }
+    .header__cart {
+        width: 50px;
+        height: 50px;
+        background-image: url("/src/assets/carrello_love_black.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 86%;
+        padding: 8px;
+        border-radius: 50%;
+        border: 3px solid black;
+        outline: 6px solid white;
+        &:hover {
+            cursor: pointer;
+            border-color: var(--c-accent);
+        }
+    }
+    .card_products {
+        display: none;
+    }
+}
+
+.gender_btn {
+    width: 200px;
+    height: 50px;
+    border-radius: 8%/30%;
+    border: 3px solid black;
+    outline: 6px solid white;
+    font: var(--f-secondary);
+    color: rgb(59, 59, 59);
+    font-size: 16px;
+    &:hover {
+        cursor: pointer;
+        border-color: var(--c-accent);
+        color: black;
+        font-weight: bold;
+    }
+}
+
+.btn_pressed {
+    font-weight: bold;
+    font-size: 17px;
+    color: black;
+    box-shadow: inset 2px 2px 5px 2px rgba(252, 175, 76, 0.7), inset -2px -2px 5px 2px rgba(252, 175, 76, 0.7);
+    &:hover {
+        cursor: default;
+        border-color: black;
+    }
 }
 
 main {
@@ -46,10 +121,10 @@ main {
     transition: 0.3s;
     &:hover {
         cursor: pointer;
-        border-color: #9e5400;
+        border-color: var(--c-accent);
         transform: scale(1.02);
         .popolarity .valStar {
-            filter: invert(69%) sepia(42%) saturate(4731%) hue-rotate(1deg) brightness(96%) contrast(104%);
+            filter: var(--filter-accent)
         }
     }
 }
@@ -203,7 +278,7 @@ main {
     top: 86%;
     right: 15%;
     &:hover .valStar {
-        filter: invert(69%) sepia(42%) saturate(4731%) hue-rotate(1deg) brightness(96%) contrast(104%);
+        filter: var(--filter-accent)
     }
 }
 
@@ -235,9 +310,9 @@ main {
         margin: 10px;
     }
     &:hover {
-        border-color: #9e5400;
+        border-color: var(--c-accent);
         .cartSign__image {
-            filter: invert(69%) sepia(42%) saturate(4731%) hue-rotate(1deg) brightness(96%) contrast(104%);
+            filter: var(--filter-accent)
         }
     }
     &:active {
