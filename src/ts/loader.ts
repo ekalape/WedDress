@@ -19,7 +19,7 @@ type mDress = {
     tie: string,
     hiddenID:string
 }
-export const db = createDatabase()
+//export const db = createDatabase()
 
 export async function createDatabase(): Promise<cloth.Cloth[]> {
     const responseW = await fetch("/src/database/woman.json");

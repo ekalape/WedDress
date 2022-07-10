@@ -97,27 +97,42 @@ export class Cloth {
 
     createModalCard():HTMLElement {
         const cardModal: HTMLElement = document.createElement("div");
-        cardModal.classList.add("card_modal");
+        cardModal.classList.add("card_modal"); //card
 
-        const cardImage: HTMLElement = document.createElement("div");
+        const cardImage: HTMLElement = document.createElement("div"); //image
         cardImage.classList.add("card__image_modal")
         cardImage.style.backgroundImage = `url(${this.imageURL})`;
 
-        const title: HTMLHeadingElement = document.createElement("h4");
-        title.classList.add("modal_title")
+        const cardDescription:HTMLElement = document.createElement("div"); //description
+        cardDescription.classList.add("card__descr_modal")
+
+        cardModal.append(cardImage, cardDescription); // appended img and text
+/* --- inside descriprion--- */
+        const title: HTMLHeadingElement = document.createElement("h4"); //title
+        title.classList.add("descr_modal__title")
         title.textContent = `${this.gender} wedding dress`
 
-        const list: HTMLElement = document.createElement("ul");
-        list.classList.add("modal_list")
-
+        const list: HTMLElement = document.createElement("ul"); //properties container
+        list.classList.add("descr_modal__list")
+//created props
         const descrPr = Object.keys(this).filter(x => !["_price", "gender", "hiddenID", "imageURL", "popolarity"].includes(x)).sort((a, b) => this.comparator(a, b));
         console.log(descrPr);
 
         this.toString().forEach(x => {
-            const litem: HTMLElement = document.createElement("li");
+            const litem: HTMLElement = document.createElement("li"); //every prop : to string, color, price
             litem.classList.add("modal_list__item");
             litem.textContent = x;
+            list.append(litem)
         })
+
+        cardDescription.append(title, list) //appended inside description
+/* --- create popularity sign --- */
+const modalPopularity = this.starsCreator(this.popularity);
+modalPopularity.classList.add("popolarity", "modal_popularity");
+cardDescription.append(modalPopularity);
+
+     //console.log(`created modal ${this.toString().join(", ")}`);
+        
         return cardModal;
     }
 
