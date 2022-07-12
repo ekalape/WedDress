@@ -4,7 +4,7 @@ import * as enums from "./enums"
 
 
 export type filter = {
-    orderedBy: enums.ordering | string,
+    orderedBy?: enums.ordering | string,
     minSize?: number,
     maxSize?: number,
     color?: enums.dressColors,
@@ -20,10 +20,8 @@ export type filter = {
 }
 
 
-
-
-
 export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
+    if(!filters.orderedBy) filters.orderedBy = enums.ordering.SHAFFLE;
     const database = array ?? await createDatabase();
     let minSize = filters.minSize ?? 0;
     let maxSize = filters.maxSize ?? 100;

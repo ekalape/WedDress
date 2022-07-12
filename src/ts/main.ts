@@ -5,53 +5,66 @@ import "../style.scss";
 import { Cloth } from './clothBase';
 
 
-const filter:ord.filter ={
-    orderedBy: enums.ordering.SHAFFLE,
-   
+const filter:ord.filter ={}
 
-}
+
 
 const cardContainer = document.querySelector(".card-container")
+const collectChoiceBtns = document.querySelectorAll(".gender_btn");
 let baseData:Cloth[];
 let hid:string;
+const genderBtns:HTMLElement = document.querySelector(".genderBtn_container") as HTMLElement;
 
 
 async function start(){
- 
+    genderBtns.addEventListener("click", createGenderFilter )
     baseData = await ord.applyFilters(filter)
+    drawCardContainer(baseData)
+}
+start()
 
-console.log("appena started and returned applFilters");
-
+async function drawCardContainer(baseData:Cloth[]){  
 for(let item of baseData){
    const i = item.createCard();
     cardContainer?.append(i)
 }
-cardContainer?.addEventListener("click", (event)=>{
-  
-    event.stopPropagation()
-  
+cardContainer?.addEventListener("click", (event)=>{  
+    event.stopPropagation()  
     let t = event.target as HTMLElement;
     let cl = t.closest(".card") as HTMLElement;
     if(cardContainer.contains(cl)){
         const descr = cl.children[1] as HTMLElement;
         hid = descr.dataset["hid"]||""
         let item = baseData.filter(x=>x.hiddenID===hid);
-        console.log(item[0]);
-
-       // item[0].createModalCard()
-       // Object.keys(item[0])
-        
+   
        if(item) {const m =createModalWindow(item[0]);
-        console.log(item[0]);
-        
+        console.log(item[0]);        
     document.body.prepend(m)}
-    }
-    
-    
-})      
-    
+    }      
+}) }
+
+
+async function createGenderFilter(event:Event){
+    console.log(event);       
+    let et = event.target as HTMLButtonElement;
+
+if(et.classList.contains("gender_btn")&& !et.classList.contains("btn_pressed")){
+console.log(et.textContent);
+
+if(et.textContent?.includes("Woman")) filter.gender = "Woman"
+else if(et.textContent?.includes("Man"))filter.gender = "Man"
+else delete filter.gender;
+collectChoiceBtns.forEach(x=> {if(x.classList.contains("btn_pressed"))x.classList.remove("btn_pressed")})
+et.classList.add("btn_pressed")
+
+baseData = await ord.applyFilters(filter)
+if(cardContainer)cardContainer.innerHTML ="";
+
+await drawCardContainer(baseData);
+
 }
-start()
+
+}
 
 function createModalWindow(ourCard:Cloth):HTMLElement{
 
