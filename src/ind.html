@@ -22,20 +22,45 @@
         <div class="cart_products"></div>
     </header>
     <main>
-        <button class="filters_open">Filters</button>
-        <div class="filters_menu">
-            <button class="apply_filters">Apply filters</button>
-            <div class="filters_menu__sort">
-                <h5 class="fm_sort__title"></h5>
-                <div class="fm_sort__upwardPrice"></div>
-                <!-- change to  -->
-                <div class="fm_sort__downwardPrice"></div>
-                <div class="fm_sort__upwardPopolarity"></div>
-                <div class="fm_sort__downwardPopolarity"></div>
+        <div class="filters_menu_container">
+
+            <div class="filters_menu">
+                <div class="filters_menu__controls">
+                    <button class="apply_filters gender_btn">Apply filters</button>
+                    <button class="clear_filters gender_btn">Clear filters</button>
+                </div>
+                <hr>
+                <div class="filters_menu__sort">
+                    <h5 class="fm_sort__title">Sort:</h5>
+                    <div class="fm_sort__upwardPrice"></div>
+                    <!-- change to input radio -->
+                    <div class="fm_sort__downwardPrice"></div>
+                    <div class="fm_sort__upwardPopolarity"></div>
+                    <div class="fm_sort__downwardPopolarity"></div>
+                </div>
+                <hr>
+                <div class="filters_menu__sliders">
+                    <div class="slider"></div>
+                    <div class="slider"></div>
+                    <div class="slider"></div>
+                </div>
+                <hr>
+                <div class="filters_menu__colors">
+                    <h5 class="fm_colors__title">Colors:</h5>
+                    <div class="checks">
+                        <input type="checkbox" class="colors__checkbox">
+                        <input type="checkbox" class="colors__checkbox">
+                        <input type="checkbox" class="colors__checkbox">
+                        <input type="checkbox" class="colors__checkbox">
+                    </div>
+                </div>
+                <hr>
+                <div class="filters_menu__additional">
+                    <input type="checkbox">
+                    <input type="checkbox">
+                </div>
             </div>
-            <div class="filters_menu__sliders"></div>
-            <div class="filters_menu__colors"></div>
-            <div class="filters_menu__additional"></div>
+            <button class="filters_open">Filters</button>
         </div>
 
         <div class="card-container"></div>

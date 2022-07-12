@@ -3,9 +3,13 @@ import * as ord from"./ordering";
 
 import "../style.scss";
 import { Cloth } from './clothBase';
+import { drawColors } from './menuLoader';
 
 
-const filter:ord.filter ={}
+export const filter:ord.filter ={
+gender:"Man",
+color:["blue","white"]
+}
 
 
 
@@ -14,16 +18,23 @@ const collectChoiceBtns = document.querySelectorAll(".gender_btn");
 let baseData:Cloth[];
 let hid:string;
 const genderBtns:HTMLElement = document.querySelector(".genderBtn_container") as HTMLElement;
-
+const filters_open_btn = document.querySelector(".filters_open") as HTMLElement;
+const filters_menu = document.querySelector(".filters_menu_container") as HTMLElement;
 
 async function start(){
+    filters_open_btn.addEventListener("click", menuSlideOut)
     genderBtns.addEventListener("click", createGenderFilter )
+
     baseData = await ord.applyFilters(filter)
     drawCardContainer(baseData)
+    drawColors()
 }
 start()
 
-async function drawCardContainer(baseData:Cloth[]){  
+export async function drawCardContainer(baseData:Cloth[]){  
+    if(cardContainer)cardContainer.innerHTML ="";
+    console.log(baseData);
+    
 for(let item of baseData){
    const i = item.createCard();
     cardContainer?.append(i)
@@ -43,28 +54,6 @@ cardContainer?.addEventListener("click", (event)=>{
     }      
 }) }
 
-
-async function createGenderFilter(event:Event){
-    console.log(event);       
-    let et = event.target as HTMLButtonElement;
-
-if(et.classList.contains("gender_btn")&& !et.classList.contains("btn_pressed")){
-console.log(et.textContent);
-
-if(et.textContent?.includes("Woman")) filter.gender = "Woman"
-else if(et.textContent?.includes("Man"))filter.gender = "Man"
-else delete filter.gender;
-collectChoiceBtns.forEach(x=> {if(x.classList.contains("btn_pressed"))x.classList.remove("btn_pressed")})
-et.classList.add("btn_pressed")
-
-baseData = await ord.applyFilters(filter)
-if(cardContainer)cardContainer.innerHTML ="";
-
-await drawCardContainer(baseData);
-
-}
-
-}
 
 function createModalWindow(ourCard:Cloth):HTMLElement{
 
@@ -100,15 +89,29 @@ function createModalWindow(ourCard:Cloth):HTMLElement{
      cardModal.append(cartSign);
 
 bg.append(cardModal);
-
-
-
-
-
 return bg;
 
 }
 
+async function createGenderFilter(event:Event){
+    console.log(event);       
+    let et = event.target as HTMLButtonElement;
+
+if(et.classList.contains("gender_btn")&& !et.classList.contains("btn_pressed")){
+console.log(et.textContent);
+
+if(et.textContent?.includes("Woman")) filter.gender = "Woman"
+else if(et.textContent?.includes("Man"))filter.gender = "Man"
+else delete filter.gender;
+collectChoiceBtns.forEach(x=> {if(x.classList.contains("btn_pressed"))x.classList.remove("btn_pressed")})
+et.classList.add("btn_pressed")
+
+baseData = await ord.applyFilters(filter)
+
+await drawCardContainer(baseData);
+}}
+
+//------to the cart class
 function isInCart(item:Cloth):boolean{
     return false;
 }
@@ -117,6 +120,10 @@ function addToCart(item:Cloth){
 }
 function removeFromCart(item:Cloth){
     
+}
+//--------
+function menuSlideOut(){
+    filters_menu.classList.toggle("opened")
 }
 
 

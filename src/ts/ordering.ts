@@ -7,8 +7,8 @@ export type filter = {
     orderedBy?: enums.ordering | string,
     minSize?: number,
     maxSize?: number,
-    color?: enums.dressColors,
-    length?: enums.dressLength | string,
+    color?: enums.dressColors[]|string[],
+    len?:string[],
     sleeves?: boolean,
     tie?: enums.ties | string,
     complexity?: enums.dressComplex | number,
@@ -36,13 +36,13 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
         result = result.filter(x => x.gender === filters.gender)
     }
     if ("color" in filters) {
-        result = result.filter(x => x.color === filters.color)
+        result = result.filter(x =>  filters.color?.includes(x.color))
     }
     if ("sleeves" in filters) {
         result = result.filter((x) => isWomanCloth(x) && x.sleeves === filters.sleeves)
     }
-    if ("length" in filters) {
-        result = result.filter((x) => isWomanCloth(x) && x.length === filters.length)
+    if ("len" in filters) {
+        result = result.filter((x) => isWomanCloth(x) && filters.len?.includes(x.len))
     }
 
 

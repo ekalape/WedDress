@@ -150,7 +150,7 @@ cardDescription.append(modalPopularity);
 
 export class WomanCloth extends Cloth {
     sleeves: boolean;
-    length: enums.dressLength | string;
+    len: enums.dressLength | string;
     gender: string = "Woman"
 
 
@@ -163,14 +163,14 @@ export class WomanCloth extends Cloth {
     ) {
         super(color, imageURL, hiddenID);
         this.sleeves = sleeves;
-        this.length = length;
+        this.len = length;
         this.size = this.setSize([[38, 40, 42, 44, 46, 48, 50, 52, 54], 3]);
     }
 
     override toString(): string[] {
         let sl: string = this.propertyToString("sleeves")
         let color = this.color[0].toUpperCase() + this.color.slice(1);
-        return [`${this.length[0].toUpperCase() + this.length.slice(1)} dress ${sl}`,"", `Color: ${color}`, `${this.propertyToString("size")}`, `Price: ${this.price}$`]
+        return [`${this.len[0].toUpperCase() + this.len.slice(1)} dress ${sl}`,"", `Color: ${color}`, `${this.propertyToString("size")}`, `Price: ${this.price}$`]
 
 
 
@@ -181,7 +181,7 @@ export class WomanCloth extends Cloth {
             this.sleeves ? result = "with sleeves" : result = "without sleeves"
         }
         if (prop === "length") {
-            result = `${this.length[0].toUpperCase() + this.length.slice(1)} length`
+            result = `${this.len[0].toUpperCase() + this.len.slice(1)} length`
         }
         if (prop === "size") {
             result = `Available sizes: ${this.size.join(", ")}`
