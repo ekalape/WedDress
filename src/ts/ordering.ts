@@ -1,6 +1,7 @@
 import * as cloth from "./clothBase";
 import { createDatabase } from './loader';
 import * as enums from "./enums"
+import * as main from "./main"
 
 
 export type filter = {
@@ -29,6 +30,8 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
     let maxPrice = filters.maxPrice ?? 1000000;
     let minPop = filters.minPop ?? 0;
     let maxPop = filters.maxPop ?? 6;
+
+    if(!filters.color) {filters.color = Object.keys(enums.manColors).concat(Object.keys(enums.womanColors)).map(x=>x.toLowerCase())}
 
     let result = [...database]
 
@@ -61,7 +64,9 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
 
 
 
-    if (result.length === 0) alert("Sorry, but nothing found!")
+    if (result.length === 0) {/* alert("Sorry, but nothing found!") */
+console.log(main.filter);
+}
     else {
         switch (filters.orderedBy) {
             case enums.ordering.PRICE_UP:
@@ -103,4 +108,8 @@ function shaffle(arr: cloth.Cloth[]): cloth.Cloth[] {
         [arr[currIndex], arr[randomIndex]] = [arr[randomIndex], arr[currIndex]]
     }
     return arr;
+}
+
+export async function updateFilter(){
+
 }

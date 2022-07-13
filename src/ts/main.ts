@@ -3,18 +3,17 @@ import * as ord from"./ordering";
 
 import "../style.scss";
 import { Cloth } from './clothBase';
-import { drawColors } from './menuLoader';
+import { drawColors,drawAdditionals } from './menuLoader';
 
 
 export const filter:ord.filter ={
-gender:"Man",
-color:["blue","white"]
+
 }
 
 
 
 const cardContainer = document.querySelector(".card-container")
-const collectChoiceBtns = document.querySelectorAll(".gender_btn");
+//const collectChoiceBtns = document.querySelectorAll(".gender_btn");
 let baseData:Cloth[];
 let hid:string;
 const genderBtns:HTMLElement = document.querySelector(".genderBtn_container") as HTMLElement;
@@ -22,18 +21,20 @@ const filters_open_btn = document.querySelector(".filters_open") as HTMLElement;
 const filters_menu = document.querySelector(".filters_menu_container") as HTMLElement;
 
 async function start(){
+genderBtns.append(...createGenderBtns());
     filters_open_btn.addEventListener("click", menuSlideOut)
     genderBtns.addEventListener("click", createGenderFilter )
 
     baseData = await ord.applyFilters(filter)
     drawCardContainer(baseData)
     drawColors()
+    drawAdditionals()
 }
 start()
 
+
 export async function drawCardContainer(baseData:Cloth[]){  
     if(cardContainer)cardContainer.innerHTML ="";
-    console.log(baseData);
     
 for(let item of baseData){
    const i = item.createCard();
@@ -92,23 +93,53 @@ bg.append(cardModal);
 return bg;
 
 }
+function createGenderBtns():HTMLButtonElement[]{
+    const wBtn = document.createElement("button") as HTMLButtonElement;
+    const mBtn = document.createElement("button") as HTMLButtonElement;
+    const allBtn = document.createElement("button") as HTMLButtonElement;
 
-async function createGenderFilter(event:Event){
-    console.log(event);       
+    wBtn.classList.add("gender_btn");
+    mBtn.classList.add("gender_btn");
+    allBtn.classList.add("gender_btn");
+    wBtn.textContent="Woman Collection";
+    mBtn.textContent="Man Collection";
+    allBtn.textContent="Mix";
+
+    if(!filter.gender) allBtn.classList.add("btn_pressed")
+    else if (filter.gender === "Man") mBtn.classList.add("btn_pressed");
+    else wBtn.classList.add("btn_pressed");
+
+    return [wBtn, mBtn, allBtn]
+}
+
+async function createGenderFilter(event:Event){    
+    
     let et = event.target as HTMLButtonElement;
-
+    delete filter.gender;
+    console.log(filter);
+    
+    delete filter.len;
+delete filter.sleeves;
+delete filter.tie;
+delete filter.complexity;
 if(et.classList.contains("gender_btn")&& !et.classList.contains("btn_pressed")){
-console.log(et.textContent);
+if(et.textContent?.includes("Woman")) {filter.gender = "Woman";
 
-if(et.textContent?.includes("Woman")) filter.gender = "Woman"
-else if(et.textContent?.includes("Man"))filter.gender = "Man"
-else delete filter.gender;
+}
+if(et.textContent?.includes("Man")){filter.gender = "Man";
+
+}
+drawAdditionals()
+let collectChoiceBtns = [...genderBtns.children]
 collectChoiceBtns.forEach(x=> {if(x.classList.contains("btn_pressed"))x.classList.remove("btn_pressed")})
 et.classList.add("btn_pressed")
 
 baseData = await ord.applyFilters(filter)
+console.log(filter.gender);
 
+drawColors();
 await drawCardContainer(baseData);
+
 }}
 
 //------to the cart class
