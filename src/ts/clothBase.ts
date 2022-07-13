@@ -1,9 +1,4 @@
 import * as enums from "./enums"
-
-
-
-
-
 export class Cloth {
     color: enums.dressColors;
     imageURL: string;

@@ -6,7 +6,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const devServer = (isDev) => !isDev ? {} : {
     devServer: {
-
         open: true,
         hot: true,
         port: 5501,

@@ -19,7 +19,6 @@ type mDress = {
     tie: string,
     hiddenID:string
 }
-//export const db = createDatabase()
 
 export async function createDatabase(): Promise<cloth.Cloth[]> {
     const responseW = await fetch("/src/database/woman.json");
@@ -30,8 +29,7 @@ export async function createDatabase(): Promise<cloth.Cloth[]> {
 
     const database: cloth.Cloth[] = [];
 
-    for (let i of menArray) {
-     
+    for (let i of menArray) {     
         database.push(new cloth.ManCloth(i.color, i.complexity, i.tie, i.imageURL,i.hiddenID));
     }
     for (let i of womenArray) {

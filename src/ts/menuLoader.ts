@@ -51,14 +51,18 @@ async function changeColorFilter(event: Event) {
     console.log(ch.checked);
     
     if (!ch.checked)
-   /*  if(filter.color) */
-        filter.color = filter.color?.filter(x => x !== ch_color)
-       /*  else */ 
+ 
+   {console.log(ch_color, ch.checked);
+   
+        filter.color = filter.color?.filter(x => x !== ch_color)}
+  
     else {
         if(!filter.color)filter.color =[ch_color]
         else filter.color.push(ch_color)}
 
     let f = await applyFilters(filter)
+    console.log(filter.color);
+    
     drawCardContainer(f)
 }
 
