@@ -2,86 +2,110 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="shortcut icon" href="/src/assets/star_gray.png" type="image/x-icon">
-
-
+    <link rel="shortcut icon" href="/src/assets/star_gray.png" type="image/x-icon" />
 </head>
 
 <body>
     <header>
-        <img class="LogoWD" src="/src/assets/logo_WD.png" alt="Logo">
-        <div class="genderBtn_container">
-        </div>
-        <input type="search" class="search_bar" autofocus="true" placeholder="I'm looking for...">
+        <img class="LogoWD" src="/src/assets/logo_WD.png" alt="Logo" />
+        <div class="genderBtn_container"></div>
+        <input type="search" class="search_bar" autofocus="true" placeholder="I'm looking for..." />
         <button class="header__cart"></button>
         <div class="cart_products"></div>
     </header>
     <main>
         <div class="filters_menu_container">
-
             <div class="filters_menu">
                 <div class="filters_menu__controls">
                     <!-- <button class="apply_filters gender_btn">Apply filters</button> -->
                     <button class="clear_filters gender_btn">Clear all filters</button>
                 </div>
-                <hr>
+                <hr />
                 <div class="filters_menu__sort">
                     <h5 class="fm_sort__title">Sort by:</h5>
                     <div class="fm_sort__wrapper">
-                        <input name="sort" type="radio" id="upwardPrice" class="sortRadio">
-                        <label for="upwardPrice" value="upwardPrice">price, from lesser to higher</label>
-                    </div>
+                        <input name="sort" type="radio" id="upwardPrice" class="sortRadio" />
+                        <label for="upwardPrice" value="upwardPrice">price, from lesser to higher</label
+              >
+            </div>
 
-                    <div class="fm_sort__wrapper">
-                        <input name="sort" type="radio" id="downwardPrice" class="sortRadio">
-                        <label for="downwardPrice" value="downwardPrice">price, from higher to lesser</label>
-                    </div>
+            <div class="fm_sort__wrapper">
+              <input
+                name="sort"
+                type="radio"
+                id="downwardPrice"
+                class="sortRadio"
+              />
+              <label for="downwardPrice" value="downwardPrice"
+                >price, from higher to lesser</label
+              >
+            </div>
 
-                    <div class="fm_sort__wrapper">
-                        <input name="sort" type="radio" id="upwardPopularity" class="sortRadio">
-                        <label for="upwardPopularity" value="upwardPopularity">popularity rating, from lesser to higher</label>
-                    </div>
+            <div class="fm_sort__wrapper">
+              <input
+                name="sort"
+                type="radio"
+                id="upwardPopularity"
+                class="sortRadio"
+              />
+              <label for="upwardPopularity" value="upwardPopularity"
+                >popularity rating, from lesser to higher</label
+              >
+            </div>
 
-                    <div class="fm_sort__wrapper">
-                        <input name="sort" type="radio" id="downwardPopolarity" class="sortRadio">
-                        <label for="downwardPopolarity" value="downwardPrice">popularity rating, from higher to lesser</label>
-                    </div>
+            <div class="fm_sort__wrapper">
+              <input
+                name="sort"
+                type="radio"
+                id="downwardPopolarity"
+                class="sortRadio"
+              />
+              <label for="downwardPopolarity" value="downwardPrice"
+                >popularity rating, from higher to lesser</label
+              >
+            </div>
 
-                    <div class="fm_sort__wrapper">
-                        <input name="sort" type="radio" id="shaffle" class="sortRadio" checked>
-                        <label for="shaffle" value="shaffle">no sorting at all</label>
+            <div class="fm_sort__wrapper">
+              <input
+                name="sort"
+                type="radio"
+                id="shaffle"
+                class="sortRadio"
+                checked
+              />
+              <label for="shaffle" value="shaffle">no sorting at all</label>
                     </div>
-
                 </div>
-                <hr>
+                <hr />
                 <div class="filters_menu__sliders">
                     <div class="slider"></div>
                     <div class="slider"></div>
                     <div class="slider"></div>
                 </div>
-                <hr>
+                <hr />
                 <div class="filters_menu__colors">
                     <h5 class="fm_colors__title">Colors:</h5>
-                    <div class="checks">
-                    </div>
+                    <div class="checks"></div>
                 </div>
-                <hr>
-                <div class="filters_menu__additional">
-                </div>
+                <hr />
+                <div class="filters_menu__additional"></div>
             </div>
             <button class="filters_open">Filters</button>
         </div>
 
         <div class="card-container"></div>
-
     </main>
-    <footer></footer>
-
-
+    <footer>
+        <div class="left_footer">
+            <a href="https://github.com/ekalape" class="githubLink">GITHUB</a>
+            <span> © 2022</span>
+        </div>
+        <a href="https://rs.school/js/" class="rsslink"><img src="/src/assets/rs_school_js.svg" alt="rs-school" /></a>
+    </footer>
 </body>
 
 </html>
