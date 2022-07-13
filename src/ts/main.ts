@@ -3,7 +3,7 @@ import * as ord from "./ordering";
 
 import "../style.scss";
 import { Cloth } from './clothBase';
-import { drawColors, drawAdditionals } from './menuLoader';
+import { drawColors, drawAdditionals,drawSortingSwitch } from './menuLoader';
 
 
 export const filter: ord.filter = {
@@ -13,22 +13,25 @@ export const filter: ord.filter = {
 
 
 const cardContainer = document.querySelector(".card-container")
-//const collectChoiceBtns = document.querySelectorAll(".gender_btn");
-let baseData: Cloth[];
-let hid: string;
+export let baseData: Cloth[];
+
 const genderBtns: HTMLElement = document.querySelector(".genderBtn_container") as HTMLElement;
 const filters_open_btn = document.querySelector(".filters_open") as HTMLElement;
 const filters_menu = document.querySelector(".filters_menu_container") as HTMLElement;
 
 async function start() {
+console.log("function START works");
+
     genderBtns.append(...createGenderBtns());
     filters_open_btn.addEventListener("click", menuSlideOut)
     genderBtns.addEventListener("click", createGenderFilter)
 
-    baseData = await ord.applyFilters(filter)
+    baseData = await ord.applyFilters(filter,baseData)
+
     drawCardContainer(baseData)
-    drawColors()
-    drawAdditionals()
+    drawColors(baseData)
+    drawAdditionals(baseData)
+    drawSortingSwitch(baseData)
 }
 start()
 
@@ -38,24 +41,14 @@ export async function drawCardContainer(baseData: Cloth[]) {
 
     for (let item of baseData) {
         const i = item.createCard();
+        i.addEventListener("click", (event) => {
+            console.log(item);
+            const modal = createModalWindow(item);
+            document.body.prepend(modal)
+        })
         cardContainer?.append(i)
     }
-    cardContainer?.addEventListener("click", (event) => {
-        event.stopPropagation()
-        let t = event.target as HTMLElement;
-        let cl = t.closest(".card") as HTMLElement;
-        if (cardContainer.contains(cl)) {
-            const descr = cl.children[1] as HTMLElement;
-            hid = descr.dataset["hid"] || ""
-            let item = baseData.filter(x => x.hiddenID === hid);
 
-            if (item) {
-                const m = createModalWindow(item[0]);
-                console.log(item[0]);
-                document.body.prepend(m)
-            }
-        }
-    })
 }
 
 
@@ -84,10 +77,10 @@ function createModalWindow(ourCard: Cloth): HTMLElement {
 
     if (isInCart(ourCard)) {
         cartSign_image.src = "/src/assets/carrello_love_black.png"
-        cartSign_text.textContent = `Add to Cart`
+        cartSign_text.textContent = `Remove from Cart`
     } else {
         cartSign_image.src = "/src/assets/carrello_remove_black.png"
-        cartSign_text.textContent = `Remove from Cart`
+        cartSign_text.textContent = `Add to Cart`
     }
     cartSign.append(cartSign_image, cartSign_text)
     cardModal.append(cartSign);
@@ -134,17 +127,16 @@ async function createGenderFilter(event: Event) {
             filter.gender = "Man";
 
         }
-        drawAdditionals()
+        drawAdditionals(baseData)
         let collectChoiceBtns = [...genderBtns.children]
         collectChoiceBtns.forEach(x => { if (x.classList.contains("btn_pressed")) x.classList.remove("btn_pressed") })
         et.classList.add("btn_pressed")
 
-        baseData = await ord.applyFilters(filter)
+    /*     baseData = await ord.applyFilters(filter, baseData) */
         console.log(filter.gender);
 
-        drawColors();
-        await drawCardContainer(baseData);
-
+        drawColors(baseData);
+        drawCardContainer(await ord.applyFilters(filter, baseData));
     }
 }
 

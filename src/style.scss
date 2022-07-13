@@ -206,6 +206,7 @@ main {
 .card-container {
     width: 80%;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
 }
@@ -375,12 +376,14 @@ main {
     }
 }
 
+
+/* ==================================== filter menu ===================================== */
+
 .filters_menu {
     width: 100%;
     height: 100vh;
     border-left: 0.2rem solid black;
     background-color: white;
-    //outline: 12px solid white;
     position: relative;
     top: 0;
     right: 0;
@@ -417,6 +420,7 @@ hr {
     font: var(--f-primary);
     font-size: 18px;
     align-self: center;
+    margin: 10px;
 }
 
 .filters_menu__sort,
@@ -424,7 +428,29 @@ hr {
 .filters_menu__colors {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    // padding: 10px;
+}
+
+.fm_sort__wrapper {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    label {
+        font: var(--f-secondary);
+        color: black;
+    }
+    .sortRadio {
+        /*  appearance: none; */
+        width: 20px;
+        height: 20px;
+        border: 2px solid black;
+        border-radius: 50%;
+        accent-color: var(--c-accent);
+    }
 }
 
 .checks {

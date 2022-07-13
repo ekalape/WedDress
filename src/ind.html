@@ -30,12 +30,32 @@
                 </div>
                 <hr>
                 <div class="filters_menu__sort">
-                    <h5 class="fm_sort__title">Sort:</h5>
-                    <div class="fm_sort__upwardPrice"></div>
-                    <!-- change to input radio -->
-                    <div class="fm_sort__downwardPrice"></div>
-                    <div class="fm_sort__upwardPopolarity"></div>
-                    <div class="fm_sort__downwardPopolarity"></div>
+                    <h5 class="fm_sort__title">Sort by:</h5>
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="upwardPrice" class="sortRadio">
+                        <label for="upwardPrice" value="upwardPrice">price, from lesser to higher</label>
+                    </div>
+
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="downwardPrice" class="sortRadio">
+                        <label for="downwardPrice" value="downwardPrice">price, from higher to lesser</label>
+                    </div>
+
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="upwardPopularity" class="sortRadio">
+                        <label for="upwardPopularity" value="upwardPopularity">popularity rating, from lesser to higher</label>
+                    </div>
+
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="downwardPopolarity" class="sortRadio">
+                        <label for="downwardPopolarity" value="downwardPrice">popularity rating, from higher to lesser</label>
+                    </div>
+
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="shaffle" class="sortRadio" checked>
+                        <label for="shaffle" value="shaffle">no sorting at all</label>
+                    </div>
+
                 </div>
                 <hr>
                 <div class="filters_menu__sliders">
@@ -47,16 +67,10 @@
                 <div class="filters_menu__colors">
                     <h5 class="fm_colors__title">Colors:</h5>
                     <div class="checks">
-                        <input type="checkbox" class="colors__checkbox">
-                        <input type="checkbox" class="colors__checkbox">
-                        <input type="checkbox" class="colors__checkbox">
-                        <input type="checkbox" class="colors__checkbox">
                     </div>
                 </div>
                 <hr>
                 <div class="filters_menu__additional">
-                    <input type="checkbox">
-                    <input type="checkbox">
                 </div>
             </div>
             <button class="filters_open">Filters</button>

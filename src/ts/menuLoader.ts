@@ -2,24 +2,22 @@ import { filter } from "./main"
 import * as enums from "./enums"
 import { applyFilters } from "./ordering"
 import { drawCardContainer } from "./main"
+import{Cloth} from "./clothBase"
+import {baseData} from "./main"
 
-export function drawColors() {
+export function drawColors(baseData:Cloth[]) {
     const c_container = document.querySelector(".checks") as HTMLElement;
     c_container.innerHTML = "";
-    let colors ;
-
+    let colors;
     if (filter.gender) {
         if (filter.gender === "Man") {
-
             colors = Object.keys(enums.manColors);
-
         }
         else {
             colors = Object.keys(enums.womanColors);
         }
-    }else colors= [...new Set([...Object.keys(enums.manColors), ...Object.keys(enums.womanColors)])]
+    } else colors = [...new Set([...Object.keys(enums.manColors), ...Object.keys(enums.womanColors)])]
 
-    console.log(colors);
     colors.forEach(x => {
         const ch = document.createElement("input") as HTMLInputElement;
         ch.type = "checkbox";
@@ -37,36 +35,69 @@ export function drawColors() {
         c_container.append(ch)
 
     })
-
-
 }
 
-async function changeColorFilter(event: Event) {
+async function changeColorFilter(event:Event) {
     let ch = event.target as HTMLInputElement;
-    console.log(ch);
-    
-
     let ch_color = ch.style.backgroundColor;
-    console.log(ch_color);
-    console.log(ch.checked);
-    
-    if (!ch.checked)
- 
-   {console.log(ch_color, ch.checked);
-   
-        filter.color = filter.color?.filter(x => x !== ch_color)}
-  
-    else {
-        if(!filter.color)filter.color =[ch_color]
-        else filter.color.push(ch_color)}
 
-    let f = await applyFilters(filter)
-    console.log(filter.color);
-    
-    drawCardContainer(f)
+    if (!ch.checked) {
+        console.log(ch_color, ch.checked);
+        filter.color = filter.color?.filter(x => x !== ch_color)
+    }
+
+    else {
+        if (!filter.color) filter.color = [ch_color]
+        else filter.color.push(ch_color)
+    }
+
+
+    drawCardContainer(await applyFilters(filter, baseData))
 }
 
-export function drawAdditionals() {
+
+export function drawSortingSwitch(baseData:Cloth[]) {
+
+    const choices = [...document.querySelectorAll(".sortRadio")] as HTMLInputElement[]
+
+    let ch = choices.filter(x=>(x as HTMLInputElement).checked)
+    console.log(ch[0].id);
+
+choices.forEach(x=> (x as HTMLInputElement).addEventListener("click", (event)=>{   
+    switchSorting(x.id, choices, baseData);
+    x.checked = true;
+}))
+    console.log(choices);
+
+    
+}
+
+async function switchSorting(id: string, choices:HTMLInputElement[], baseData:Cloth[]) {
+choices.forEach(x=>x.checked=false);
+
+    switch (id) {
+        case "upwardPrice":
+filter.orderedBy=enums.ordering.PRICE_UP;
+            break;
+        case "downwardPrice":
+            filter.orderedBy=enums.ordering.PRICE_DOWN;
+            break;
+        case "upwardPopularity":
+            filter.orderedBy=enums.ordering.POPULARITY_UP;
+            break;
+        case "downwardPopolarity":
+            filter.orderedBy=enums.ordering.POPULARITY_DOWN;
+            break;
+        case "shaffle":
+            filter.orderedBy=enums.ordering.SHAFFLE;
+            break;
+           default:
+            filter.orderedBy=enums.ordering.SHAFFLE;
+    }
+    drawCardContainer(await applyFilters(filter,baseData))
+}
+
+export function drawAdditionals(baseData:Cloth[]) {
     const a_container = document.querySelector(".filters_menu__additional") as HTMLElement;
     if (a_container) a_container.innerHTML = "";
     if (filter.gender === "Woman") {
@@ -136,50 +167,45 @@ export function drawAdditionals() {
     }
 
 }
-
-
-
 async function createAdditionalFilter(event: Event) {
     let t = event.target as HTMLSelectElement
     console.log(t.value)
 
     let val = t.value.toLowerCase();
 
-    if(filter.gender === "Man"){
+    if (filter.gender === "Man") {
 
         delete filter.len;
         delete filter.sleeves;
 
-       if(val.includes("tie")) {delete filter.tie}
-       if(val.includes("pieces")){delete filter.complexity}
+        if (val.includes("tie")) { delete filter.tie }
+        if (val.includes("pieces")) { delete filter.complexity }
 
-       if (val.includes("two")) filter.complexity = 2;
-       if (val.includes("three")) filter.complexity = 3;
-       if (val.includes("classic")) filter.tie = "tie";
-       if (val.includes("bow")) filter.tie = "bow";
-       if (val.includes("without a tie")) filter.tie = "none";
+        if (val.includes("two")) filter.complexity = 2;
+        if (val.includes("three")) filter.complexity = 3;
+        if (val.includes("classic")) filter.tie = "tie";
+        if (val.includes("bow")) filter.tie = "bow";
+        if (val.includes("without a tie")) filter.tie = "none";
 
 
     }
-if(filter.gender=== "Woman"){
-delete filter.tie;
-delete filter.complexity;
+    if (filter.gender === "Woman") {
+        delete filter.tie;
+        delete filter.complexity;
 
-    if (val.includes("sl")) {
-        delete filter.sleeves;
-    } 
-    if(val.includes("len")) {
-        delete filter.len;
-    } 
+        if (val.includes("sl")) {
+            delete filter.sleeves;
+        }
+        if (val.includes("len")) {
+            delete filter.len;
+        }
 
-    if (val.includes("with")) filter.sleeves = true;
-    if (val.includes("without sleeves")) filter.sleeves = false;
-    if (val.includes("long")) filter.len = ["long"];
-    if (val.includes("medium")) filter.len = ["medium"];
-    if (val.includes("short")) filter.len = ["short"];
-}
+        if (val.includes("with")) filter.sleeves = true;
+        if (val.includes("without sleeves")) filter.sleeves = false;
+        if (val.includes("long")) filter.len = ["long"];
+        if (val.includes("medium")) filter.len = ["medium"];
+        if (val.includes("short")) filter.len = ["short"];
+    }
 
-    console.log(filter);
-
-    drawCardContainer(await applyFilters(filter));
+    drawCardContainer(await applyFilters(filter, baseData));
 }
