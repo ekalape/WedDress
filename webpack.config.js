@@ -19,7 +19,7 @@ module.exports = ({ develop }) => ({
     devtool: develop ? "inline-source-map" : false,
 
     ...devServer(develop),
-    entry: './src/ts/main.ts',
+    entry: '/src/structure/main.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
