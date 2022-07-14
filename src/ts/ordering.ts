@@ -30,8 +30,11 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
     let maxPrice = filters.maxPrice ?? 1000000;
     let minPop = filters.minPop ?? 0;
     let maxPop = filters.maxPop ?? 6;
+/* let f = [...new Set([...Object.keys(enums.manColors), ...Object.keys(enums.womanColors)])]
+console.log(f); */
 
-    if(!filters.color) {filters.color = Object.keys(enums.manColors).concat(Object.keys(enums.womanColors)).map(x=>x.toLowerCase())}
+    if(!filters.color) {filters.color = [...new Set([...Object.keys(enums.manColors), ...Object.keys(enums.womanColors)])].map(x=>x.toLowerCase())}
+
 
     let result = [...database]
 
@@ -39,6 +42,7 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
         result = result.filter(x => x.gender === filters.gender)
     }
     if ("color" in filters) {
+        console.log(filters.color);
         result = result.filter(x =>  filters.color?.includes(x.color))
     }
     if ("sleeves" in filters) {
@@ -65,7 +69,7 @@ export async function applyFilters(filters: filter, array?: cloth.Cloth[]) {
 
 
     if (result.length === 0) {/* alert("Sorry, but nothing found!") */
-console.log(main.filter);
+
 }
     else {
         switch (filters.orderedBy) {

@@ -40,9 +40,10 @@ export function drawColors(baseData:Cloth[]) {
 async function changeColorFilter(event:Event) {
     let ch = event.target as HTMLInputElement;
     let ch_color = ch.style.backgroundColor;
+    
 
     if (!ch.checked) {
-        console.log(ch_color, ch.checked);
+        
         filter.color = filter.color?.filter(x => x !== ch_color)
     }
 
@@ -61,15 +62,12 @@ export function drawSortingSwitch(baseData:Cloth[]) {
     const choices = [...document.querySelectorAll(".sortRadio")] as HTMLInputElement[]
 
     let ch = choices.filter(x=>(x as HTMLInputElement).checked)
-    console.log(ch[0].id);
-
+ 
 choices.forEach(x=> (x as HTMLInputElement).addEventListener("click", (event)=>{   
     switchSorting(x.id, choices, baseData);
     x.checked = true;
 }))
-    console.log(choices);
 
-    
 }
 
 async function switchSorting(id: string, choices:HTMLInputElement[], baseData:Cloth[]) {

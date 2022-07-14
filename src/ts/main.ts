@@ -6,9 +6,7 @@ import { Cloth } from './clothBase';
 import { drawColors, drawAdditionals,drawSortingSwitch } from './menuLoader';
 
 
-export const filter: ord.filter = {
-
-}
+export let filter: ord.filter = {}
 
 
 
@@ -22,6 +20,12 @@ const filters_menu = document.querySelector(".filters_menu_container") as HTMLEl
 async function start() {
 console.log("function START works");
 
+loadFilter()
+window.addEventListener("beforeunload", saveFilter)
+
+/* ---debug filter---- */
+document.querySelector("header")?.addEventListener("click", ()=>console.log(filter))
+
     genderBtns.append(...createGenderBtns());
     filters_open_btn.addEventListener("click", menuSlideOut)
     genderBtns.addEventListener("click", createGenderFilter)
@@ -34,7 +38,15 @@ console.log("function START works");
     drawSortingSwitch(baseData)
 }
 start()
-
+function loadFilter(){
+    let f = localStorage.getItem("wdStorFilter");
+    if(!f) filter = {};
+    else filter = JSON.parse(f);
+}
+function saveFilter(event:Event){
+    event?.preventDefault();
+    localStorage.setItem("wdStorFilter", JSON.stringify(filter))
+}
 
 export async function drawCardContainer(baseData: Cloth[]) {
     if (cardContainer) cardContainer.innerHTML = "";
@@ -112,8 +124,6 @@ async function createGenderFilter(event: Event) {
 
     let et = event.target as HTMLButtonElement;
     delete filter.gender;
-    console.log(filter);
-
     delete filter.len;
     delete filter.sleeves;
     delete filter.tie;
