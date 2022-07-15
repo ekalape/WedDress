@@ -9,7 +9,7 @@ export class Filter {
     len?: string;
     sleeves?: string;
     tie?: string;
-    complexity?: number;
+    complexity?: string;
     minPrice: number;
     maxPrice: number;
     minPop: number;
@@ -18,7 +18,7 @@ export class Filter {
     constructor(orderedBy: ORDER = ORDER.SHAFFLE, gender:string[] = ["Man", "Woman"],
         minSize: number = 0, maxSize: number = 100, 
         colors: string[] = [],
-        len?: string , sleeves?: string , tie?: string, complexity?: number ,
+        len?: string , sleeves?: string , tie?: string, complexity?: string ,
         minPrice: number = 0, maxPrice: number = 100000, minPop: number = 0, maxPop: number = 6
     ) {
         this.orderedBy = orderedBy;

@@ -1,8 +1,8 @@
 import "../style.scss"
-import { createDatabase,filterDatabase } from './dataLoader';
+import { createDatabase,updateData } from './dataLoader';
 import { Cloth } from "./cloth"
 import { Filter } from "./Filter"
-import { renderCardContainer,renderGenderBtns,renderColorBtns } from './renders';
+import *as render from './renders';
 
 
 
@@ -14,18 +14,21 @@ async function start() {
 /*     loadFilterFromStorage();
     window.addEventListener("beforeunload", saveFilterToStorage); */
 //filter.gender = ["Man"]
+
+
 filter = new Filter()
-/* data = await createDatabase(); */
+filter.len="short"
+data = await createDatabase();
  
 document.querySelector("header")?.addEventListener("click", ()=>{console.log(filter)})
 
 
-const currentData = await filterDatabase(filter,data)
 
-console.log(currentData)
-renderGenderBtns(filter, currentData);
-renderColorBtns(filter, currentData)
-renderCardContainer(currentData)
+const currentData = await updateData(filter)
+
+
+render.renderElements(filter)
+render.renderCardContainer(currentData)
 
 }
 

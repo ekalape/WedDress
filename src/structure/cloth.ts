@@ -12,7 +12,7 @@ export class Cloth {
     sleeves?: string;
     len?: string;
     tie?: string;
-    compl?: number;
+    compl?: string;
 
     constructor(hiddenID: string, imageURL: string, gender: string, color: string) {
         this.hiddenID = hiddenID;
@@ -28,7 +28,7 @@ export class Cloth {
     setTie(tie: string) {
         this.tie = tie;
     }
-    setCompl(compl: number) {
+    setCompl(compl: string) {
         this.compl = compl;
     }
     setLen(len: string) {
@@ -48,7 +48,7 @@ export class Cloth {
 
         if (this.gender === "Man") {
             addProp1 = this.tie ? this.tie === "bow" ? "with a bow tie" : this.tie === "classic" ? "with a classic tie" : "without a tie" : "";
-            addProp2 = this.compl ? this.compl === 2 ? "Two pieces" : "Three pieces" : "";
+            addProp2 = this.compl ? this.compl === "two" ? "Two pieces" : "Three pieces" : "";
             desc = `${addProp2} wedding suit`
             if (addProp1.length != 0) result.unshift(addProp1);
             result.unshift(desc);
@@ -56,7 +56,7 @@ export class Cloth {
         }
         if (this.gender === "Woman") {
             addProp1 = this.len ? this.len[0].toUpperCase() + this.len.slice(1) : ""
-            addProp2 = this.sleeves ? this.sleeves === "with" ? "with sleeves" : "without sleeves" : ""
+            addProp2 = this.sleeves ? this.sleeves.includes("with") ? "with sleeves" : "without sleeves" : ""
             desc = `${addProp2} wedding dress`
             if (addProp1.length != 0) result.unshift(addProp1);
             result.unshift(desc);

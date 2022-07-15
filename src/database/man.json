@@ -15,14 +15,14 @@
     {
         "imageURL": "../src/assets/men/m-black-3.jpg",
         "color": "black",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m2"
     },
     {
         "imageURL": "../src/assets/men/m-black-4.jpg",
         "color": "black",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m3"
     },
@@ -43,21 +43,21 @@
     {
         "imageURL": "../src/assets/men/m-black-7.jpg",
         "color": "black",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m6"
     },
     {
         "imageURL": "../src/assets/men/m-blue-1.jpg",
         "color": "blue",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m7"
     },
     {
         "imageURL": "../src/assets/men/m-blue-2.jpg",
         "color": "blue",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m8"
     },
@@ -78,7 +78,7 @@
     {
         "imageURL": "../src/assets/men/m-blue-5.jpg",
         "color": "blue",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m10"
     },
@@ -99,7 +99,7 @@
     {
         "imageURL": "../src/assets/men/m-gray-1.jpg",
         "color": "gray",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m13"
     },
@@ -120,7 +120,7 @@
     {
         "imageURL": "../src/assets/men/m-gray-4.jpg",
         "color": "gray",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m16"
     },
@@ -134,7 +134,7 @@
     {
         "imageURL": "../src/assets/men/m-white-2.jpg",
         "color": "white",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 2,
         "hiddenID": "m18"
     },
@@ -148,14 +148,14 @@
     {
         "imageURL": "../src/assets/men/m-white-4.jpg",
         "color": "white",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m20"
     },
     {
         "imageURL": "../src/assets/men/m-white-5.jpg",
         "color": "white",
-        "tie": "tie",
+        "tie": "classic",
         "complexity": 3,
         "hiddenID": "m21"
     },

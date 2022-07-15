@@ -2,6 +2,7 @@
 import { Cloth } from './cloth';
 import { Filter, ORDER } from './Filter';
 import { renderCardContainer } from './renders';
+import {data} from "./main"
 
 
 
@@ -13,7 +14,7 @@ type prod = {
     tie: string,
     complexity: number,
     sleeves: string,
-    len: string
+    length: string
 }
 
 export async function createDatabase() {
@@ -25,13 +26,15 @@ export async function createDatabase() {
     const womenArr = await resp2.json()
     menArr.forEach((x: prod) => {
         const item = new Cloth(x.hiddenID, x.imageURL, "Man", x.color);
-        item.setTie(x.tie);
-        item.setCompl(x.complexity);
+        item.setTie(x.tie); 
+        if(x.complexity===2) {item.setCompl("two");}
+        if(x.complexity===3){item.setCompl("three");}
+ 
         database.push(item)
     })
     womenArr.forEach((x: prod) => {
         const item = new Cloth(x.hiddenID, x.imageURL, "Woman", x.color);
-        item.setLen(x.len);
+        item.setLen(x.length);
         item.setSleeves(x.sleeves);
         database.push(item)
     })
@@ -40,15 +43,24 @@ export async function createDatabase() {
 
 }
 
-export async function filterDatabase(filter: Filter, data?: Cloth[]) {
-    let database = data ?? await createDatabase()
+export async function updateData(filter: Filter) {
+    let d = data 
 
-    if (filter.len) { database = database.filter(x => filter.len === x.len) }
-    if (filter.tie) { database = database.filter(x => filter.tie === x.tie) }
-    if (filter.sleeves) { database = database.filter(x => filter.sleeves === x.sleeves) }
+let database =[...d]
+
+database = database.filter(x => filter.gender.includes(x.gender) && filter.colors.includes(x.color))
+
+if(filter.gender.length === 1 && filter.gender.includes("Man")){
+    if (filter.tie) { database = database.filter(x => filter.tie === x.tie) };
     if (filter.complexity) { database = database.filter(x => filter.complexity === x.compl) }
+}
 
-    database = database.filter(x => filter.gender.includes(x.gender) && filter.colors.includes(x.color))
+if(filter.gender.length === 1 && filter.gender.includes("Woman")){
+    if (filter.len) { database = database.filter(x => filter.len === x.len) } 
+    if (filter.sleeves) { database = database.filter(x => filter.sleeves === x.sleeves) }
+
+}
+ 
 
     /* result = result.filter(x => (x.price >= minPrice && x.price <= maxPrice))
       result = result.filter(x => (x.popularity >= minPop && x.popularity <= maxPop))
@@ -60,6 +72,9 @@ export async function filterDatabase(filter: Filter, data?: Cloth[]) {
     }
 
     renderCardContainer(database)
+
+    console.log(database);
+    
 
     return database;
 

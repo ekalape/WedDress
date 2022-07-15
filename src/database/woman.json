@@ -1,153 +1,153 @@
 [{
         "imageURL": "/src/assets/woman/w-white-1.jpg",
         "color": "white",
-        "sleeves": false,
+        "sleeves": "with sleeves",
         "length": "long",
         "hiddenID": "w0"
     },
     {
         "imageURL": "/src/assets/woman/w-white-2.jpg",
         "color": "white",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w1"
     },
     {
         "imageURL": "/src/assets/woman/w-white-3.jpg",
         "color": "white",
-        "sleeves": true,
+        "sleeves": "with sleeves",
         "length": "long",
         "hiddenID": "w2"
     },
     {
         "imageURL": "/src/assets/woman/w-white-4.jpg",
         "color": "white",
-        "sleeves": true,
+        "sleeves": "with sleeves",
         "length": "long",
         "hiddenID": "w3"
     },
     {
         "imageURL": "/src/assets/woman/w-white-5.jpg",
         "color": "white",
-        "sleeves": true,
+        "sleeves": "with sleeves",
         "length": "long",
         "hiddenID": "w4"
     },
     {
         "imageURL": "/src/assets/woman/w-white-6.jpg",
         "color": "white",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "medium",
         "hiddenID": "w5"
     },
     {
         "imageURL": "/src/assets/woman/w-white-7.jpg",
         "color": "white",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "medium",
         "hiddenID": "w6"
     },
     {
         "imageURL": "/src/assets/woman/w-white-8.jpg",
         "color": "white",
-        "sleeves": true,
+        "sleeves": "with sleeves",
         "length": "short",
         "hiddenID": "w7"
     }, {
         "imageURL": "/src/assets/woman/w-blue-1.jpg",
         "color": "blue",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w8"
     },
     {
         "imageURL": "/src/assets/woman/w-blue-2.jpg",
         "color": "blue",
-        "sleeves": true,
+        "sleeves": "with sleeves",
         "length": "long",
         "hiddenID": "w9"
     },
     {
         "imageURL": "/src/assets/woman/w-blue-3.jpg",
         "color": "blue",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w10"
     },
     {
         "imageURL": "/src/assets/woman/w-blue-4.jpg",
         "color": "blue",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "short",
         "hiddenID": "w11"
     },
     {
         "imageURL": "/src/assets/woman/w-blue-5.jpg",
         "color": "blue",
-        "sleeves": true,
+        "sleeves": "with sleeves",
         "length": "medium",
         "hiddenID": "w12"
     },
     {
         "imageURL": "/src/assets/woman/w-red-1.jpg",
         "color": "red",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w13"
     },
     {
         "imageURL": "/src/assets/woman/w-red-2.jpg",
         "color": "red",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w14"
     },
     {
         "imageURL": "/src/assets/woman/w-red-3.jpg",
         "color": "red",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "medium",
         "hiddenID": "w15"
     },
     {
         "imageURL": "/src/assets/woman/w-red-4.jpg",
         "color": "red",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "short",
         "hiddenID": "w16"
     },
     {
         "imageURL": "/src/assets/woman/w-yellow-1.jpg",
         "color": "yellow",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w17"
     },
     {
         "imageURL": "/src/assets/woman/w-yellow-2.jpg",
         "color": "yellow",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w18"
     },
     {
         "imageURL": "/src/assets/woman/w-yellow-3.jpg",
         "color": "yellow",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w19"
     },
     {
         "imageURL": "/src/assets/woman/w-yellow-4.jpg",
         "color": "yellow",
-        "sleeves": true,
+        "sleeves": "with sleeves",
         "length": "short",
         "hiddenID": "w20"
     },
     {
         "imageURL": "/src/assets/woman/w-yellow-5.jpg",
         "color": "yellow",
-        "sleeves": false,
+        "sleeves": "without sleeves",
         "length": "medium",
         "hiddenID": "w21"
     }
