@@ -1,6 +1,11 @@
+
+import * as noUiSlider from 'nouislider';
 import { Cloth } from './cloth';
 import { updateData } from './dataLoader';
 import { Filter, ORDER } from './Filter';
+
+import { PipsMode, target, API } from "nouislider"
+
 
 const menColors = ["white", "black", "gray", "blue"];
 const womenColors = ["white", "red", "yellow", "blue"];
@@ -12,6 +17,7 @@ export function renderElements(filter:Filter){
     renderSortingOpt(filter);
     renderColorBtns(filter);
     renderAdditionals(filter);
+    renderSliders(filter)
 
 }
 
@@ -306,4 +312,84 @@ await updateData(filter)
    }  
 
 }
+
+function renderSliders(filter:Filter){
+
+    let minPrice = filter.minPrice;
+    let maxPrice = filter.maxPrice;
+    console.log(filter.minSize);
+    
+
+    let minSize = filter.minSize;
+    let maxSize = filter.maxSize;
+
+const sliderPrice = document.querySelector(".sl_price") as noUiSlider.target;
+const sliderSize = document.querySelector(".sl_size") as noUiSlider.target;
+
+
+noUiSlider.create(sliderPrice,{
+    start: [minPrice, maxPrice],
+    connect: true,
+    range: {
+        "min":1000,
+        "max":5000
+    },
+    step:100,
+    tooltips:false,
+    
+    pips: {
+        mode: PipsMode.Count,
+        values: 6,
+        stepped: true,
+        density: 5,
+       
+    }    
+});
+sliderPrice.noUiSlider?.on("change", (value)=>{
+    switchPrice(value as string[])})
+
+noUiSlider.create(sliderSize,{
+    start: [minSize, maxSize],
+    connect: true,
+    range: {
+        "min":38,
+        "max":56
+    },
+    pips: {
+        mode: PipsMode.Count,
+        values: 10,
+        stepped: true,
+        density: 10,
+       
+    }
+});
+sliderSize.noUiSlider?.on("change", (value)=>{
+    switchSize(value as string[])})
+
+
+async function switchPrice(range:string[]){
+
+    let minPrice = Number(range[0]);
+    let maxPrice = Number(range[1]);
+    filter.minPrice = minPrice;
+    filter.maxPrice = maxPrice;
+
+    await updateData(filter)      
+    }
+    async function switchSize(range:string[]){
+        
+        let minSize = Number(range[0].slice(0,2));
+        let maxSize = Number(range[1].slice(0,2));
+        console.log(range);
+        filter.minSize = minSize;
+        filter.maxSize = maxSize;
+
+        await updateData(filter);
+        
+        
+    }
+
+}
+
+
 

@@ -39,7 +39,7 @@ export async function createDatabase() {
         database.push(item)
     })
 
-    return database;
+    return database /* as Cloth[] */;
 
 }
 
@@ -60,11 +60,12 @@ if(filter.gender.length === 1 && filter.gender.includes("Woman")){
     if (filter.sleeves) { database = database.filter(x => filter.sleeves === x.sleeves) }
 
 }
- 
+database = database.filter(x => (x.price >= filter.minPrice && x.price <= filter.maxPrice));
+database = database.filter(x => (x.sizes.some(s => s >= filter.minSize && s <= filter.maxSize))) 
 
-    /* result = result.filter(x => (x.price >= minPrice && x.price <= maxPrice))
+    /* 
       result = result.filter(x => (x.popularity >= minPop && x.popularity <= maxPop))
-      result = result.filter(x => (x.size.some(s => s >= minSize && s <= maxSize))) */
+      */
 
     if (database.length === 0) alert("Sorry, no results found!")
     else {

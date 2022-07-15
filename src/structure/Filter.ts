@@ -19,7 +19,7 @@ export class Filter {
         minSize: number = 0, maxSize: number = 100, 
         colors: string[] = [],
         len?: string , sleeves?: string , tie?: string, complexity?: string ,
-        minPrice: number = 0, maxPrice: number = 100000, minPop: number = 0, maxPop: number = 6
+        minPrice: number = 0, maxPrice: number = 5000, minPop: number = 0, maxPop: number = 6
     ) {
         this.orderedBy = orderedBy;
   

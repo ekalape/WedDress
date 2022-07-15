@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: 0.5s;
 }
 
 @mixin btn-bordering {
@@ -176,7 +177,7 @@ main {
     background-size: cover;
     background-position: -30%;
     box-shadow: inset 4px 4px 8px 2px white, inset -4px -4px 8px 2px white;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .card__description {
@@ -201,6 +202,7 @@ main {
     margin: 10px auto;
     display: flex;
     justify-content: space-evenly;
+    transition: 0.5s;
 }
 
 .popolarity img {
@@ -309,6 +311,7 @@ main {
     z-index: 8;
     top: 86%;
     right: 15%;
+    transition: 0.5s;
     &:hover .valStar {
         filter: var(--filter-accent)
     }
@@ -322,12 +325,13 @@ main {
     top: 85%;
     left: 8%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 10%/40%;
     border: 0.2rem solid black;
     outline: 6px solid rgba(255, 255, 255, 0.7);
+    transition: 0.5s;
     .cartSign__text {
         font: var(--f-secondary);
         font-size: 17px;
@@ -456,6 +460,42 @@ hr {
         border-radius: 50%;
         accent-color: var(--c-accent);
     }
+}
+
+.filters_menu__sliders {
+    align-items: center;
+    padding-bottom: 10px;
+    gap: 20px;
+}
+
+.slider {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.sl_size::before {
+    content: "- Available size range -";
+    width: 100px;
+    font: var(--f-secondary);
+    position: absolute;
+    top: -25px;
+    left: 35%;
+}
+
+.sl_price::before {
+    content: "- Price range -";
+    width: 100px;
+    font: var(--f-secondary);
+    position: absolute;
+    top: -25px;
+    left: 35%;
+}
+
+.sl_price {
+    margin-bottom: 30px;
 }
 
 .checks {

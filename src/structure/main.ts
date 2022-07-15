@@ -1,8 +1,11 @@
+
+import 'nouislider/dist/nouislider.css';
 import "../style.scss"
 import { createDatabase,updateData } from './dataLoader';
 import { Cloth } from "./cloth"
 import { ORDER,Filter } from "./Filter"
 import *as render from './renders';
+
 
 
 
