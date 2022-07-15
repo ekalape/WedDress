@@ -1,5 +1,5 @@
 export enum ORDER{
-    "SHAFFLE", "PRICE_UP","PRICE_DOWN", "POPULARITY_UP", "POPULARITY_DOWN"
+     "PRICE_UP","PRICE_DOWN", "POPULARITY_UP", "POPULARITY_DOWN","SHAFFLE"
 }
 export class Filter {
     orderedBy: ORDER;

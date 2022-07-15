@@ -1,7 +1,7 @@
 import "../style.scss"
 import { createDatabase,updateData } from './dataLoader';
 import { Cloth } from "./cloth"
-import { Filter } from "./Filter"
+import { ORDER,Filter } from "./Filter"
 import *as render from './renders';
 
 
@@ -17,7 +17,7 @@ async function start() {
 
 
 filter = new Filter()
-filter.len="short"
+filter.orderedBy = ORDER.POPULARITY_DOWN
 data = await createDatabase();
  
 document.querySelector("header")?.addEventListener("click", ()=>{console.log(filter)})

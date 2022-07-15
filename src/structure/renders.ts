@@ -1,6 +1,6 @@
 import { Cloth } from './cloth';
 import { updateData } from './dataLoader';
-import { Filter } from './Filter';
+import { Filter, ORDER } from './Filter';
 
 const menColors = ["white", "black", "gray", "blue"];
 const womenColors = ["white", "red", "yellow", "blue"];
@@ -8,9 +8,8 @@ const allColors = ["white", "black", "gray", "blue", "red", "yellow"]
 let database:Cloth[]
 export function renderElements(filter:Filter){
 
-
-
     renderGenderBtns(filter);
+    renderSortingOpt(filter);
     renderColorBtns(filter);
     renderAdditionals(filter);
 
@@ -81,20 +80,15 @@ function renderGenderBtns(filter: Filter) {
 
         if (t.textContent?.includes("Man")) {
             filter.gender = ["Man"]
-          /*   delete filter.len;
-            delete filter.sleeves; */
+
         }
         if (t.textContent?.includes("Woman")) {
             filter.gender = ["Woman"]
-        /*     delete filter.complexity;
-            delete filter.tie; */
+
         }
         if (t.textContent?.includes("Mix")) {
             filter.gender = ["Man", "Woman"]
-       /*      delete filter.len;
-            delete filter.sleeves;
-            delete filter.complexity;
-            delete filter.tie; */
+
         }
         renderColorBtns(filter);
         renderAdditionals(filter)
@@ -272,16 +266,44 @@ export function renderAdditionals(filter: Filter) {
             else delete filter.complexity;
         }
 
-
-
-
-
-
-
-
 await updateData(filter);
 
     }
+
+}
+
+function renderSortingOpt(filter:Filter){
+    const sortOptions = [...document.querySelectorAll(".sortRadio")] as HTMLInputElement[]
+
+const checkedOpt = sortOptions.filter((x:HTMLInputElement)=>x.id === ORDER[filter.orderedBy])
+checkedOpt[0].checked = true;
+   sortOptions.forEach(s=>s.addEventListener("click", switchSorting));
+
+   async function switchSorting(event:Event){
+const t = event.target as HTMLInputElement;
+
+console.log(t);
+switch(t.id){
+case "PRICE_UP":
+    filter.orderedBy=ORDER.PRICE_UP;
+    break;
+    case "PRICE_DOWN":
+    filter.orderedBy=ORDER.PRICE_DOWN;
+    break;
+    case "POPULARITY_UP":
+    filter.orderedBy=ORDER.POPULARITY_UP;
+    break;
+    case "POPULARITY_DOWN":
+    filter.orderedBy=ORDER.POPULARITY_DOWN;
+    break;
+    case "SHAFFLE":
+    filter.orderedBy=ORDER.SHAFFLE;
+    break;
+        
+}
+t.checked = true;
+await updateData(filter)
+   }  
 
 }
 
