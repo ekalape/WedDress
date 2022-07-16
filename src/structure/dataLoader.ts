@@ -2,7 +2,7 @@
 import { Cloth } from './cloth';
 import { Filter, ORDER } from './Filter';
 import { renderCardContainer } from './renders';
-import {data} from "./main"
+import { data } from "./main"
 
 
 
@@ -26,10 +26,10 @@ export async function createDatabase() {
     const womenArr = await resp2.json()
     menArr.forEach((x: prod) => {
         const item = new Cloth(x.hiddenID, x.imageURL, "Man", x.color);
-        item.setTie(x.tie); 
-        if(x.complexity===2) {item.setCompl("two");}
-        if(x.complexity===3){item.setCompl("three");}
- 
+        item.setTie(x.tie);
+        if (x.complexity === 2) { item.setCompl("two"); }
+        if (x.complexity === 3) { item.setCompl("three"); }
+
         database.push(item)
     })
     womenArr.forEach((x: prod) => {
@@ -44,28 +44,24 @@ export async function createDatabase() {
 }
 
 export async function updateData(filter: Filter) {
-    let d = data 
+    let d = data
 
-let database =[...d]
+    let database = [...d]
 
-database = database.filter(x => filter.gender.includes(x.gender) && filter.colors.includes(x.color))
+    database = database.filter(x => filter.gender.includes(x.gender) && filter.colors.includes(x.color))
 
-if(filter.gender.length === 1 && filter.gender.includes("Man")){
-    if (filter.tie) { database = database.filter(x => filter.tie === x.tie) };
-    if (filter.complexity) { database = database.filter(x => filter.complexity === x.compl) }
-}
+    if (filter.gender.length === 1 && filter.gender.includes("Man")) {
+        if (filter.tie) { database = database.filter(x => filter.tie === x.tie) };
+        if (filter.complexity) { database = database.filter(x => filter.complexity === x.compl) }
+    }
 
-if(filter.gender.length === 1 && filter.gender.includes("Woman")){
-    if (filter.len) { database = database.filter(x => filter.len === x.len) } 
-    if (filter.sleeves) { database = database.filter(x => filter.sleeves === x.sleeves) }
+    if (filter.gender.length === 1 && filter.gender.includes("Woman")) {
+        if (filter.len) { database = database.filter(x => filter.len === x.len) }
+        if (filter.sleeves) { database = database.filter(x => filter.sleeves === x.sleeves) }
 
-}
-database = database.filter(x => (x.price >= filter.minPrice && x.price <= filter.maxPrice));
-database = database.filter(x => (x.sizes.some(s => s >= filter.minSize && s <= filter.maxSize))) 
-
-    /* 
-      result = result.filter(x => (x.popularity >= minPop && x.popularity <= maxPop))
-      */
+    }
+    database = database.filter(x => (x.price >= filter.minPrice && x.price <= filter.maxPrice));
+    database = database.filter(x => (x.sizes.some(s => s >= filter.minSize && s <= filter.maxSize)))
 
     if (database.length === 0) alert("Sorry, no results found!")
     else {
@@ -73,9 +69,6 @@ database = database.filter(x => (x.sizes.some(s => s >= filter.minSize && s <= f
     }
 
     renderCardContainer(database)
-
-    console.log(database);
-    
 
     return database;
 
@@ -97,7 +90,7 @@ function reorderData(database: Cloth[], sorting: ORDER) {
         case ORDER.SHAFFLE:
             database = shaffle(database);
             break;
-            
+
     }
 
     return database;

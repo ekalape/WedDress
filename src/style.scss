@@ -73,8 +73,22 @@ header {
             border-color: var(--c-accent);
         }
     }
-    .card_products {
-        display: none;
+    .cart_counter {
+        /*         display: none; */
+        width: 20px;
+        height: 20px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom: -18px;
+        left: -12px;
+        background-color: black;
+        border-radius: 50%;
+        color: white;
+        font: var(--f-primary-bold);
+        text-align: center;
+        font-size: 15px;
     }
 }
 

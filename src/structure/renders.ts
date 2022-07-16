@@ -3,6 +3,8 @@ import * as noUiSlider from 'nouislider';
 import { Cloth } from './cloth';
 import { updateData } from './dataLoader';
 import { Filter, ORDER } from './Filter';
+import { addToCart, removeFromCart, cartProducts } from "./main";
+
 
 import { PipsMode, target, API } from "nouislider"
 
@@ -10,7 +12,11 @@ import { PipsMode, target, API } from "nouislider"
 const menColors = ["white", "black", "gray", "blue"];
 const womenColors = ["white", "red", "yellow", "blue"];
 const allColors = ["white", "black", "gray", "blue", "red", "yellow"]
+
 let database:Cloth[]
+
+
+
 export function renderElements(filter:Filter){
 
     renderGenderBtns(filter);
@@ -57,13 +63,44 @@ function createModalWindow(ourCard: Cloth) {
     cartSign_image.classList.add("cartSign__image");
 
     if (ourCard.carted) {
-        cartSign_image.src = "/src/assets/carrello_love_black.png"
+        cartSign_image.src = "/src/assets/carrello_remove_black.png"
         cartSign_text.textContent = `Remove from Cart`
     } else {
-        cartSign_image.src = "/src/assets/carrello_remove_black.png"
+        cartSign_image.src = "/src/assets/carrello_love_black.png"
         cartSign_text.textContent = `Add to Cart`
     }
-    cartSign.append(cartSign_image, cartSign_text)
+
+
+    cartSign.append(cartSign_image, cartSign_text);
+
+    cartSign.addEventListener("click", cartManipulation);
+
+    function cartManipulation(event:Event){
+let t = event.target as HTMLButtonElement;
+
+let c = cartSign_text.textContent
+console.log(c);
+
+
+if(c?.includes("Add")){
+
+
+    cartSign_text.textContent = "Remove from cart";
+cartSign_image.src = "/src/assets/carrello_remove_black.png"
+addToCart(ourCard);
+ourCard.carted = true;
+
+}
+else if(c?.includes("Remove")){
+    cartSign_text.textContent = "Add to cart";
+    cartSign_image.src = "/src/assets/carrello_love_black.png"
+    removeFromCart(ourCard);
+    ourCard.carted = false;
+    
+}
+
+    }
+
     cardModal.append(cartSign);
 
     bg.append(cardModal);
