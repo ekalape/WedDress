@@ -69,7 +69,7 @@ function createModalWindow(ourCard: Cloth) {
         cartSign_text.textContent = `Remove from Cart`
     } else {
         cartSign_image.src = "/src/assets/carrello_love_black.png"
-        cartSign_text.textContent = `Add to Cart`
+        cartSign_text.textContent = `Add to Cart`;
     }
 
 

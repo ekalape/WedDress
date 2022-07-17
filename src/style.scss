@@ -192,6 +192,7 @@ main {
     justify-content: space-between;
     align-items: center;
     transition: 0.3s;
+    position: relative;
     &:hover {
         cursor: pointer;
         border-color: var(--c-accent);
@@ -199,7 +200,31 @@ main {
         .popolarity .valStar {
             filter: var(--filter-accent)
         }
+        .inthecard_sign {
+            border-color: var(--c-accent);
+            // top: 40px;
+        }
     }
+}
+
+.inthecard_sign {
+    width: 150px;
+    height: 30px;
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10%/40%;
+    border: 3px solid black;
+    outline: 6px solid rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 10px;
+    // left: 30px;
+    text-align: center;
+    font: var(--f-secondary);
+    padding: 4px;
+}
+
+.inthecard_invisible {
+    opacity: 0;
 }
 
 .hiddenID {
@@ -403,12 +428,16 @@ main {
     width: 25%;
     position: fixed;
     top: 100px;
-    // right: -25%;
-    right: 0;
+    right: -25%;
     z-index: 6;
     display: flex;
     transition: 0.6s;
 }
+
+
+/* .menu_opened{
+    right: 0;
+} */
 
 .filters_open {
     width: 80px;
@@ -461,10 +490,10 @@ hr {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(179, 69, 19, 0.6), rgba(0, 0, 0, 0));
 }
 
-.apply_filters,
+.reset_filters,
 .clear_filters {
-    width: 60%;
-    border-radius: 8%/30%;
+    width: 40%;
+    border-radius: 12%/34%;
     font-size: 18px;
 }
 
@@ -632,5 +661,33 @@ footer {
     img {
         width: 40px;
         height: 40px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .filters_menu_container {
+        width: 30%;
+        right: -30%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .filters_menu_container {
+        width: 36%;
+        right: -36%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .filters_menu_container {
+        width: 48%;
+        right: -48%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .filters_menu_container {
+        width: 56%;
+        right: -56%;
     }
 }

@@ -1,3 +1,5 @@
+import { create } from 'nouislider';
+import { cartProducts } from "./main";
 
 export class Cloth {
     imageURL: string;
@@ -61,18 +63,18 @@ export class Cloth {
             arr.push("pants");
             if (this.compl === "three")
                 arr.push("waistcoat");
-                arr.push("vest");
+            arr.push("vest");
         }
         if (this.gender === "Woman") {
             arr.push("dress");
             arr.push("skirt");
             arr.push("bodice");
             arr.push("lace");
-            arr.push("length");        
+            arr.push("length");
         }
 
-        let ent = Object.entries(this).filter(x=> !["imageURL", "carted", "hiddenID", "searchWords"].includes(x[0])).flat(2).map(x=>String(x))
-      
+        let ent = Object.entries(this).filter(x => !["imageURL", "carted", "hiddenID", "searchWords"].includes(x[0])).flat(2).map(x => String(x))
+
 
         return arr.concat(ent);
     }
@@ -100,8 +102,8 @@ export class Cloth {
             if (addProp2.length != 0) result.unshift(addProp2);
             result.unshift(desc);
             if (addProp1.length != 0) result.unshift(addProp1);
-           
-           
+
+
         }
         return result;
     }
@@ -122,23 +124,49 @@ export class Cloth {
         cardDescription.append(...this.createDescription("p"))
 
         card.append(cardImage, cardDescription, cardPopularity);
+        cartProducts.forEach(x => {
+            if (x.hiddenID === this.hiddenID) {
+                this.carted = true;
+            }
+        })
+        const infoSign = this.addCartInfoSign()
+        if (infoSign) card.append(infoSign)
+
         return card;
     }
+
+    addCartInfoSign(): HTMLElement {
+
+        const inthecard_sign = document.createElement("div") as HTMLElement;
+        inthecard_sign.classList.add("inthecard_invisible");
+        inthecard_sign.dataset.hid = this.hiddenID;
+       
+        if (this.carted) {
+            inthecard_sign.textContent = "-Is in your cart-";
+            console.log(this.hiddenID, " is carted", this.carted);
+            inthecard_sign.classList.replace("inthecard_invisible","inthecard_sign")
+           
+        }
+        return inthecard_sign
+
+    }
+
+
     private createDescription(elem: string) {
         const descr = [];
         for (let i = 0; i < 3; i++) {
             const pp = document.createElement(elem);
             descr.push(pp)
         }
-        if(this.gender === "Man"){
+        if (this.gender === "Man") {
             descr[0].textContent = `${this.toString()[0]} ${this.toString()[1]}`;
             descr[1].textContent = `${this.toString()[2]}`;
             descr[2].textContent = `${this.toString()[3]}`;
         }
-        else{
+        else {
             descr[0].textContent = `${this.toString()[0]} ${this.toString()[1]} 
             ${this.toString()[2]}`
-            descr[1].textContent = `${this.toString()[3]}`;    
+            descr[1].textContent = `${this.toString()[3]}`;
             descr[2].textContent = `${this.toString()[4]}`;
         }
 
@@ -169,12 +197,12 @@ export class Cloth {
         const liis = [...this.createDescription("li")]
 
         const pr = document.createElement("li");
-        if(this.gender==="Woman"){
+        if (this.gender === "Woman") {
             pr.textContent = this.toString()[5];
-        }else{
+        } else {
             pr.textContent = this.toString()[4];
         }
-       
+
         liis.push(pr)
 
         liis.forEach(x => x.classList.add("modal_list__item"))
