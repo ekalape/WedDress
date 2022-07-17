@@ -1,7 +1,7 @@
 [{
         "imageURL": "/src/assets/woman/w-white-1.jpg",
         "color": "white",
-        "sleeves": "with sleeves",
+        "sleeves": "without sleeves",
         "length": "long",
         "hiddenID": "w0"
     },

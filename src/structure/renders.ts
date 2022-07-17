@@ -35,6 +35,8 @@ export function renderCardContainer(database: Cloth[]) {
         const card = x.createCard();
         card.addEventListener("click", () => createModalWindow(x))
         cardCont?.append(card)
+
+
     })
 
 
@@ -233,8 +235,7 @@ export function renderAdditionals(filter: Filter) {
         let lenSelectOpt = ["Show all", "Long length", "Medium length", "Short length"];
         let slSelectOpt = ["Show all", "With sleeves", "Without sleeves"];
 
-        lenSelectOpt.forEach(x => {
-            console.log(filter.len)
+        lenSelectOpt.forEach(x => {       
             const opt = document.createElement("option");
             opt.value = x.toLowerCase() + " len";
             opt.text = x;
@@ -275,11 +276,11 @@ export function renderAdditionals(filter: Filter) {
 
         }
         if(value.includes("sleev")){
-            if (value.includes("with")) {
+            if (value.includes("with sleeves")) {
                 filter.sleeves = "with sleeves";
             }
             else if (value.includes("without")) {
-                filter.sleeves = "without";
+                filter.sleeves = "without sleeves";
             }
             else delete filter.sleeves;
         }

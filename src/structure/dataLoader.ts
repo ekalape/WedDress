@@ -73,6 +73,24 @@ export async function updateData(filter: Filter) {
     return database;
 
 }
+
+export function searchByWord(words: string[]) {
+    let database = [...data];
+    let filteredData: Cloth[] = []
+    console.log(database);
+
+    for(let d of database){
+
+        let s:string[] = d.searchWords;
+        if (words.every(x=> (s.some(w=>w.includes(x))))){filteredData.push(d)}
+
+    }
+    if (filteredData.length === 0) alert("Sorry, no results found!")
+    renderCardContainer(filteredData)
+
+}
+
+
 function reorderData(database: Cloth[], sorting: ORDER) {
     switch (sorting) {
         case ORDER.POPULARITY_DOWN:

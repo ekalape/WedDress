@@ -8,6 +8,7 @@ export class Cloth {
     popularity: number;
     price: number;
     carted: boolean;
+    searchWords: string[];
 
     sleeves?: string;
     len?: string;
@@ -21,21 +22,59 @@ export class Cloth {
         this.color = color;
         this.carted = false;
         this.price = this.setRandom(3500, 1000);
-        this.sizes = this.setSize([[38,40,42,44,46, 48,50,52,54,56], 2]);
+        this.sizes = this.setSize([[38, 40, 42, 44, 46, 48, 50, 52, 54, 56], 2]);
         this.popularity = this.setRandom(4, 2);
+        this.searchWords = this.initSearchWords();
 
     }
     setTie(tie: string) {
         this.tie = tie;
+        this.searchWords.push("tie");
+        this.searchWords.push(this.tie);
     }
     setCompl(compl: string) {
         this.compl = compl;
+        this.searchWords.push("complexity");
+        this.searchWords.push(this.compl);
     }
     setLen(len: string) {
         this.len = len;
+        this.searchWords.push(this.len);
+
     }
     setSleeves(sleeves: string) {
         this.sleeves = sleeves;
+        this.searchWords.push("sleeves");
+        this.searchWords.push(this.sleeves);
+    }
+    addSearchWords(word: string) {
+        this.searchWords.push(word)
+    }
+    private initSearchWords(): string[] {
+        const arr: string[] = [];
+        if (this.gender === "Man") {
+            arr.push("suit");
+            arr.push("pieces");
+
+            arr.push("waist");
+            arr.push("blazer");
+            arr.push("pants");
+            if (this.compl === "three")
+                arr.push("waistcoat");
+                arr.push("vest");
+        }
+        if (this.gender === "Woman") {
+            arr.push("dress");
+            arr.push("skirt");
+            arr.push("bodice");
+            arr.push("lace");
+            arr.push("length");        
+        }
+
+        let ent = Object.entries(this).filter(x=> !["imageURL", "carted", "hiddenID", "searchWords"].includes(x[0])).flat(2).map(x=>String(x))
+      
+
+        return arr.concat(ent);
     }
 
 
@@ -55,12 +94,14 @@ export class Cloth {
             // if (addProp2.length != 0) result.unshift(addProp2);
         }
         if (this.gender === "Woman") {
-            addProp1 = this.len ? this.len[0].toUpperCase() + this.len.slice(1) : ""
-            addProp2 = this.sleeves ? this.sleeves.includes("with") ? "with sleeves" : "without sleeves" : ""
-            desc = `${addProp2} wedding dress`
-            if (addProp1.length != 0) result.unshift(addProp1);
+            addProp1 = this.len ? this.len[0].toUpperCase() + this.len.slice(1) : ""//0
+            addProp2 = this.sleeves ? this.sleeves.includes("with") ? "with sleeves" : "without sleeves" : ""//2
+            desc = `wedding dress`//1
+            if (addProp2.length != 0) result.unshift(addProp2);
             result.unshift(desc);
-            //  if (addProp2.length != 0) result.unshift(addProp2);
+            if (addProp1.length != 0) result.unshift(addProp1);
+           
+           
         }
         return result;
     }
@@ -89,9 +130,18 @@ export class Cloth {
             const pp = document.createElement(elem);
             descr.push(pp)
         }
-        descr[0].textContent = `${this.toString()[0]} ${this.toString()[1]}`;
-        descr[1].textContent = `${this.toString()[2]}`;
-        descr[2].textContent = `${this.toString()[3]}`;
+        if(this.gender === "Man"){
+            descr[0].textContent = `${this.toString()[0]} ${this.toString()[1]}`;
+            descr[1].textContent = `${this.toString()[2]}`;
+            descr[2].textContent = `${this.toString()[3]}`;
+        }
+        else{
+            descr[0].textContent = `${this.toString()[0]} ${this.toString()[1]} 
+            ${this.toString()[2]}`
+            descr[1].textContent = `${this.toString()[3]}`;    
+            descr[2].textContent = `${this.toString()[4]}`;
+        }
+
         return descr;
     }
 
@@ -116,14 +166,18 @@ export class Cloth {
         list.classList.add("descr_modal__list")
         //created props
         console.log(this.toString());
-        const liis =[...this.createDescription("li")]
-  
-       
+        const liis = [...this.createDescription("li")]
+
         const pr = document.createElement("li");
-        pr.textContent = this.toString()[4];
+        if(this.gender==="Woman"){
+            pr.textContent = this.toString()[5];
+        }else{
+            pr.textContent = this.toString()[4];
+        }
+       
         liis.push(pr)
 
-        liis.forEach(x=>x.classList.add("modal_list__item"))
+        liis.forEach(x => x.classList.add("modal_list__item"))
         list.append(...liis)
 
         cardDescription.append(title, list) //appended inside description
@@ -131,8 +185,6 @@ export class Cloth {
         const modalPopularity = this.starsCreator(this.popularity);
         modalPopularity.classList.add("popolarity", "modal_popularity");
         cardDescription.append(modalPopularity);
-
-        //console.log(`created modal ${this.toString().join(", ")}`);
 
         return cardModal;
     }
@@ -142,6 +194,8 @@ export class Cloth {
     removeFromCart(): void {
         this.carted = false;
     }
+
+
 
     private setSize(a: [number[], number]): number[] {
         const s = a[0];
