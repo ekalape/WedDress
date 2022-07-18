@@ -22,15 +22,24 @@ const inputField = document.querySelector(".search_bar__input") as HTMLInputElem
 const filterOpenBtn = document.querySelector(".filters_open") as HTMLButtonElement;
 const filterContainer = document.querySelector(".filters_menu_container") as HTMLElement;
 
+const filterClearBtn = document.querySelector(".clear_filters") as HTMLButtonElement;
+const filterResetBtn = document.querySelector(".reset_filters") as HTMLButtonElement;
+
 async function start() {
+    window.addEventListener("load", ()=>{        
+        
+        loadFilterFromStorage();
+        loadCartFromStorage()
 
-    loadFilterFromStorage();
-    loadCartFromStorage()
-    window.addEventListener("beforeunload", saveFilterToStorage);
+        console.log(cartProducts);
+    })
+
+   
     counter = cartProducts.length ?? 0;
-
-
     data = await createDatabase();
+
+    window.addEventListener("beforeunload", ()=>{saveFilterToStorage(),saveCartToStorage()});
+ 
 
     document.querySelector("header")?.addEventListener("click", () => { console.log(filter) })
 
@@ -55,8 +64,15 @@ async function start() {
 
 
     filterOpenBtn.addEventListener("click", ()=>{
-        filterContainer.classList.toggle("opened")
+
+if(filterContainer.classList.contains("opened"))filterContainer.classList.remove("opened")
+else filterContainer.classList.add("opened")
+
+       // filterContainer.classList.toggle("opened")
     })
+
+    filterClearBtn.addEventListener("click",    ()=>{localStorage.setItem("wdSavedFilter", "")})
+    filterResetBtn.addEventListener("click", resetFilter)
 
 
 }
@@ -72,47 +88,63 @@ function loadFilterFromStorage() {
 
 function loadCartFromStorage() {
 
-    let f = localStorage.getItem("wdSavedCart");
-
-    if (!f || f.length === 0 || f === undefined) cartProducts = []
-    else cartProducts = JSON.parse(f)
+    cartProducts = JSON.parse(localStorage.getItem("wdSavedCart") || "[]")
 }
 
 function saveFilterToStorage() {
     localStorage.setItem("wdSavedFilter", JSON.stringify(filter));
+}
+
+function saveCartToStorage() {
+
+    console.log(cartProducts);    
+  
     localStorage.setItem("wdSavedCart", JSON.stringify(cartProducts));
+}
+
+function resetFilter(){
+filter = new Filter;   
+ render.renderGenderBtns(filter);
+ render.renderSortingOpt(filter);
+ render.renderColorBtns(filter);
+ render.renderAdditionals(filter);
+ render.updateSlider(filter);
+
 }
 
 export function addToCart(item: Cloth) {
     cartProducts.push(item);
     console.log("added >>> ", cartProducts);
-    cartCounter.textContent = String(++counter)
+ 
+    cartCounter.textContent = String(cartProducts.length)
 
     const allsigns = [...document.querySelectorAll(".inthecard_sign")] as HTMLElement[]
     const oursign = allsigns.filter(x => x.dataset.hid === item.hiddenID);
     if (oursign[0]) {
-        oursign[0].classList.remove("inthecard_invisible");
-        //oursign[0].textContent="-Is in your cart-";
+        oursign[0].classList.remove("inthecard_invisible");    
         console.log(oursign[0])
     }
+    
 
 }
 
 
 
 export function removeFromCart(item: Cloth) {
-    cartProducts = cartProducts.filter(x => x != item)
+    cartProducts = cartProducts.filter(x => x.hiddenID != item.hiddenID)
     console.log("removed >>> ", cartProducts);
-    cartCounter.textContent = String(--counter)
+
+    cartCounter.textContent = String(cartProducts.length)
 
 
     const allsigns = [...document.querySelectorAll(".inthecard_sign")] as HTMLElement[]
     const oursign = allsigns.filter(x => x.dataset.hid === item.hiddenID);
     if (oursign[0]) {
         oursign[0].classList.add("inthecard_invisible");
-        //oursign[0].textContent="";
+       
         console.log(oursign[0])
     }
+
 
 }
 

@@ -21,7 +21,7 @@
 }
 
 body {
-    width: 100%;
+    max-width: 100%;
     position: relative;
     background-color: rgb(175, 175, 175);
     display: flex;
@@ -669,12 +669,20 @@ footer {
         width: 30%;
         right: -30%;
     }
+    .opened {
+        top: 100px;
+        right: 0;
+    }
 }
 
 @media screen and (max-width: 1200px) {
     .filters_menu_container {
         width: 36%;
         right: -36%;
+    }
+    .opened {
+        top: 100px;
+        right: 0;
     }
 }
 
@@ -683,11 +691,19 @@ footer {
         width: 48%;
         right: -48%;
     }
+    .opened {
+        top: 100px;
+        right: 0;
+    }
 }
 
 @media screen and (max-width: 700px) {
     .filters_menu_container {
         width: 56%;
         right: -56%;
+    }
+    .opened {
+        top: 100px;
+        right: 0;
     }
 }

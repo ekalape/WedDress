@@ -13,11 +13,14 @@ const menColors = ["white", "black", "gray", "blue"];
 const womenColors = ["white", "red", "yellow", "blue"];
 const allColors = ["white", "black", "gray", "blue", "red", "yellow"]
 
-let database:Cloth[]
+let database: Cloth[]
+
+const sliderPrice = document.querySelector(".sl_price") as noUiSlider.target;
+const sliderSize = document.querySelector(".sl_size") as noUiSlider.target;
 
 
 
-export function renderElements(filter:Filter){
+export function renderElements(filter: Filter) {
 
     renderGenderBtns(filter);
     renderSortingOpt(filter);
@@ -77,29 +80,29 @@ function createModalWindow(ourCard: Cloth) {
 
     cartSign.addEventListener("click", cartManipulation);
 
-    function cartManipulation(event:Event){
-let t = event.target as HTMLButtonElement;
+    function cartManipulation(event: Event) {
+        let t = event.target as HTMLButtonElement;
 
-let c = cartSign_text.textContent
-console.log(c);
-
-
-if(c?.includes("Add")){
+        let c = cartSign_text.textContent
+        console.log(c);
 
 
-    cartSign_text.textContent = "Remove from cart";
-cartSign_image.src = "/src/assets/carrello_remove_black.png"
-addToCart(ourCard);
-ourCard.carted = true;
+        if (c?.includes("Add")) {
 
-}
-else if(c?.includes("Remove")){
-    cartSign_text.textContent = "Add to cart";
-    cartSign_image.src = "/src/assets/carrello_love_black.png"
-    removeFromCart(ourCard);
-    ourCard.carted = false;
-    
-}
+
+            cartSign_text.textContent = "Remove from cart";
+            cartSign_image.src = "/src/assets/carrello_remove_black.png"
+            addToCart(ourCard);
+            ourCard.carted = true;
+
+        }
+        else if (c?.includes("Remove")) {
+            cartSign_text.textContent = "Add to cart";
+            cartSign_image.src = "/src/assets/carrello_love_black.png"
+            removeFromCart(ourCard);
+            ourCard.carted = false;
+
+        }
 
     }
 
@@ -113,10 +116,18 @@ else if(c?.includes("Remove")){
 }
 
 
-function renderGenderBtns(filter: Filter) {
+export function renderGenderBtns(filter: Filter) {
     const genderBtns = document.querySelectorAll(".gb")
+    genderBtns.forEach(x =>x.classList.remove("btn_pressed"))
 
-    genderBtns.forEach(x => x.addEventListener("click", switchGender))
+    genderBtns.forEach(x => {
+        console.log(filter.gender)
+        if (filter.gender.length === 1 && x.innerHTML.includes(filter.gender[0])) { x.classList.add("btn_pressed") }
+
+        if (filter.gender.length === 2 && x.innerHTML.includes("Mix")) { x.classList.add("btn_pressed") }
+
+        x.addEventListener("click", switchGender)
+    })
 
     async function switchGender(event: Event) {
         let t = event.target as HTMLButtonElement;
@@ -142,7 +153,7 @@ function renderGenderBtns(filter: Filter) {
     }
 }
 
-function renderColorBtns(filter: Filter) {
+export function renderColorBtns(filter: Filter) {
     const colorBtns = document.querySelector(".checks");
     if (colorBtns) colorBtns.innerHTML = "";
     let colors;
@@ -211,7 +222,7 @@ export function renderAdditionals(filter: Filter) {
             opt.value = x + " tie";
             opt.text = x;
             opt.classList.add("additional__option")
-            if (filter.tie && opt.value.includes(filter.tie)) {opt.selected = true};
+            if (filter.tie && opt.value.includes(filter.tie)) { opt.selected = true };
             tieSelect.append(opt);
         })
         complSelectOpt.forEach(x => {
@@ -219,7 +230,7 @@ export function renderAdditionals(filter: Filter) {
             opt.value = x + " compl";
             opt.text = x;
             opt.classList.add("additional__option")
-            if (filter.complexity && opt.value.includes(filter.complexity)) {opt.selected = true};
+            if (filter.complexity && opt.value.includes(filter.complexity)) { opt.selected = true };
             complSelect.append(opt);
         })
         additContainer?.append(tieSelect, complSelect)
@@ -235,7 +246,7 @@ export function renderAdditionals(filter: Filter) {
         let lenSelectOpt = ["Show all", "Long length", "Medium length", "Short length"];
         let slSelectOpt = ["Show all", "With sleeves", "Without sleeves"];
 
-        lenSelectOpt.forEach(x => {       
+        lenSelectOpt.forEach(x => {
             const opt = document.createElement("option");
             opt.value = x.toLowerCase() + " len";
             opt.text = x;
@@ -257,7 +268,7 @@ export function renderAdditionals(filter: Filter) {
     }
     async function switchAdditional(event: Event) {
         const t = event.target as HTMLSelectElement;
-        
+
         console.log(t);
         let value = t.value.toLowerCase()
         if (value.includes("len")) {
@@ -275,7 +286,7 @@ export function renderAdditionals(filter: Filter) {
 
 
         }
-        if(value.includes("sleev")){
+        if (value.includes("sleev")) {
             if (value.includes("with sleeves")) {
                 filter.sleeves = "with sleeves";
             }
@@ -285,7 +296,7 @@ export function renderAdditionals(filter: Filter) {
             else delete filter.sleeves;
         }
 
-        if(value.includes("tie")){
+        if (value.includes("tie")) {
             if (value.includes("classic")) {
                 filter.tie = "classic";
             }
@@ -298,9 +309,9 @@ export function renderAdditionals(filter: Filter) {
             else delete filter.tie;
         }
 
-        if(value.includes("compl")){
+        if (value.includes("compl")) {
             console.log(value);
-            
+
             if (value.includes("two")) {
                 filter.complexity = "two";
             }
@@ -310,122 +321,128 @@ export function renderAdditionals(filter: Filter) {
             else delete filter.complexity;
         }
 
-await updateData(filter);
+        await updateData(filter);
 
     }
 
 }
 
-function renderSortingOpt(filter:Filter){
+export function renderSortingOpt(filter: Filter) {
     const sortOptions = [...document.querySelectorAll(".sortRadio")] as HTMLInputElement[]
 
-const checkedOpt = sortOptions.filter((x:HTMLInputElement)=>x.id === ORDER[filter.orderedBy])
-checkedOpt[0].checked = true;
-   sortOptions.forEach(s=>s.addEventListener("click", switchSorting));
+    const checkedOpt = sortOptions.filter((x: HTMLInputElement) => x.id === ORDER[filter.orderedBy])
+    checkedOpt[0].checked = true;
+    sortOptions.forEach(s => s.addEventListener("click", switchSorting));
 
-   async function switchSorting(event:Event){
-const t = event.target as HTMLInputElement;
+    async function switchSorting(event: Event) {
+        const t = event.target as HTMLInputElement;
 
-console.log(t);
-switch(t.id){
-case "PRICE_UP":
-    filter.orderedBy=ORDER.PRICE_UP;
-    break;
-    case "PRICE_DOWN":
-    filter.orderedBy=ORDER.PRICE_DOWN;
-    break;
-    case "POPULARITY_UP":
-    filter.orderedBy=ORDER.POPULARITY_UP;
-    break;
-    case "POPULARITY_DOWN":
-    filter.orderedBy=ORDER.POPULARITY_DOWN;
-    break;
-    case "SHAFFLE":
-    filter.orderedBy=ORDER.SHAFFLE;
-    break;
-        
+        console.log(t);
+        switch (t.id) {
+            case "PRICE_UP":
+                filter.orderedBy = ORDER.PRICE_UP;
+                break;
+            case "PRICE_DOWN":
+                filter.orderedBy = ORDER.PRICE_DOWN;
+                break;
+            case "POPULARITY_UP":
+                filter.orderedBy = ORDER.POPULARITY_UP;
+                break;
+            case "POPULARITY_DOWN":
+                filter.orderedBy = ORDER.POPULARITY_DOWN;
+                break;
+            case "SHAFFLE":
+                filter.orderedBy = ORDER.SHAFFLE;
+                break;
+
+        }
+        t.checked = true;
+        await updateData(filter)
+    }
+
 }
-t.checked = true;
-await updateData(filter)
-   }  
 
-}
-
-function renderSliders(filter:Filter){
+function renderSliders(filter: Filter) {
 
     let minPrice = filter.minPrice;
     let maxPrice = filter.maxPrice;
     console.log(filter.minSize);
-    
+
 
     let minSize = filter.minSize;
     let maxSize = filter.maxSize;
 
-const sliderPrice = document.querySelector(".sl_price") as noUiSlider.target;
-const sliderSize = document.querySelector(".sl_size") as noUiSlider.target;
+
+    noUiSlider.create(sliderPrice, {
+        start: [minPrice, maxPrice],
+        connect: true,
+        range: {
+            "min": 1000,
+            "max": 5000
+        },
+        step: 100,
+        tooltips: false,
+
+        pips: {
+            mode: PipsMode.Count,
+            values: 6,
+            stepped: true,
+            density: 5,
+
+        }
+    });
+    sliderPrice.noUiSlider?.on("change", (value) => {
+        switchPrice(value as string[])
+    })
+
+    noUiSlider.create(sliderSize, {
+        start: [minSize, maxSize],
+        connect: true,
+        range: {
+            "min": 38,
+            "max": 56
+        },
+        pips: {
+            mode: PipsMode.Count,
+            values: 10,
+            stepped: true,
+            density: 10,
+
+        }
+    });
+    sliderSize.noUiSlider?.on("change", (value) => {
+        switchSize(value as string[])
+    })
 
 
-noUiSlider.create(sliderPrice,{
-    start: [minPrice, maxPrice],
-    connect: true,
-    range: {
-        "min":1000,
-        "max":5000
-    },
-    step:100,
-    tooltips:false,
-    
-    pips: {
-        mode: PipsMode.Count,
-        values: 6,
-        stepped: true,
-        density: 5,
-       
-    }    
-});
-sliderPrice.noUiSlider?.on("change", (value)=>{
-    switchPrice(value as string[])})
+    async function switchPrice(range: string[]) {
 
-noUiSlider.create(sliderSize,{
-    start: [minSize, maxSize],
-    connect: true,
-    range: {
-        "min":38,
-        "max":56
-    },
-    pips: {
-        mode: PipsMode.Count,
-        values: 10,
-        stepped: true,
-        density: 10,
-       
+        let minPrice = Number(range[0]);
+        let maxPrice = Number(range[1]);
+        filter.minPrice = minPrice;
+        filter.maxPrice = maxPrice;
+
+        await updateData(filter)
     }
-});
-sliderSize.noUiSlider?.on("change", (value)=>{
-    switchSize(value as string[])})
+    async function switchSize(range: string[]) {
 
-
-async function switchPrice(range:string[]){
-
-    let minPrice = Number(range[0]);
-    let maxPrice = Number(range[1]);
-    filter.minPrice = minPrice;
-    filter.maxPrice = maxPrice;
-
-    await updateData(filter)      
-    }
-    async function switchSize(range:string[]){
-        
-        let minSize = Number(range[0].slice(0,2));
-        let maxSize = Number(range[1].slice(0,2));
+        let minSize = Number(range[0].slice(0, 2));
+        let maxSize = Number(range[1].slice(0, 2));
         console.log(range);
         filter.minSize = minSize;
         filter.maxSize = maxSize;
 
         await updateData(filter);
-        
-        
+
     }
+
+}
+export async function updateSlider(filter:Filter) {
+    sliderPrice.noUiSlider?.reset();
+    sliderPrice.noUiSlider?.set([0, 5000]);
+    sliderSize.noUiSlider?.reset();
+    sliderSize.noUiSlider?.set([38,56]);
+    await updateData(filter);
 
 }
 

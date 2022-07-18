@@ -138,13 +138,13 @@ export class Cloth {
     addCartInfoSign(): HTMLElement {
 
         const inthecard_sign = document.createElement("div") as HTMLElement;
-        inthecard_sign.classList.add("inthecard_invisible");
+        inthecard_sign.classList.add("inthecard_sign","inthecard_invisible");
+        inthecard_sign.textContent = "-Is in your cart-"
         inthecard_sign.dataset.hid = this.hiddenID;
        
         if (this.carted) {
-            inthecard_sign.textContent = "-Is in your cart-";
-            console.log(this.hiddenID, " is carted", this.carted);
-            inthecard_sign.classList.replace("inthecard_invisible","inthecard_sign")
+           // inthecard_sign.textContent = "-Is in your cart-";         
+            inthecard_sign.classList.remove("inthecard_invisible")
            
         }
         return inthecard_sign

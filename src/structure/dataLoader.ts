@@ -44,11 +44,11 @@ export async function createDatabase() {
 }
 
 export async function updateData(filter: Filter) {
-    let d = data
+    let d =  data
 
     let database = [...d]
 
-    database = database.filter(x => filter.gender.includes(x.gender) && filter.colors.includes(x.color))
+    database = database.filter(x =>filter.gender && filter.gender.includes(x.gender) && filter.colors.includes(x.color)) || database;
 
     if (filter.gender.length === 1 && filter.gender.includes("Man")) {
         if (filter.tie) { database = database.filter(x => filter.tie === x.tie) };
