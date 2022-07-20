@@ -14,7 +14,10 @@ type prod = {
     tie: string,
     complexity: number,
     sleeves: string,
-    length: string
+    length: string,
+    price:number,
+    popularity:number,
+    sizes:number[]
 }
 
 export async function createDatabase() {
@@ -25,7 +28,7 @@ export async function createDatabase() {
     const menArr = await resp1.json()
     const womenArr = await resp2.json()
     menArr.forEach((x: prod) => {
-        const item = new Cloth(x.hiddenID, x.imageURL, "Man", x.color);
+        const item = new Cloth(x.hiddenID, x.imageURL, "Man", x.color, x.price, x.sizes, x.popularity);
         item.setTie(x.tie);
         if (x.complexity === 2) { item.setCompl("two"); }
         if (x.complexity === 3) { item.setCompl("three"); }
@@ -33,7 +36,7 @@ export async function createDatabase() {
         database.push(item)
     })
     womenArr.forEach((x: prod) => {
-        const item = new Cloth(x.hiddenID, x.imageURL, "Woman", x.color);
+        const item = new Cloth(x.hiddenID, x.imageURL, "Woman", x.color, x.price, x.sizes, x.popularity);
         item.setLen(x.length);
         item.setSleeves(x.sleeves);
         database.push(item)
@@ -48,14 +51,14 @@ export async function updateData(filter: Filter) {
 
     let database = [...d]
 
-    database = database.filter(x =>filter.gender && filter.gender.includes(x.gender) && filter.colors.includes(x.color)) || database;
+    database = database.filter(x =>(filter.gender && filter.gender.includes(x.gender)) && filter.colors.includes(x.color)) || database;
 
-    if (filter.gender.length === 1 && filter.gender.includes("Man")) {
+    if ( !filter.gender.includes("Woman")) {
         if (filter.tie) { database = database.filter(x => filter.tie === x.tie) };
         if (filter.complexity) { database = database.filter(x => filter.complexity === x.compl) }
     }
 
-    if (filter.gender.length === 1 && filter.gender.includes("Woman")) {
+    if (!filter.gender.includes("Man")) {
         if (filter.len) { database = database.filter(x => filter.len === x.len) }
         if (filter.sleeves) { database = database.filter(x => filter.sleeves === x.sleeves) }
 

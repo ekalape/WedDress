@@ -48,6 +48,7 @@ function createModalWindow(ourCard: Cloth) {
 
     const bg: HTMLElement = document.createElement("div");
     bg.classList.add("modal-bg");
+    document.body.classList.add("main_block");
 
     const cardModal: HTMLElement = ourCard.createModalWindow();
     const closeBtn: HTMLButtonElement = document.createElement("button"); //close btn
@@ -57,7 +58,8 @@ function createModalWindow(ourCard: Cloth) {
     closeImg.title = "Close"
     closeBtn.classList.add("closeBtn")
     closeBtn.append(closeImg);
-    closeBtn.addEventListener("click", () => bg.remove())
+    closeBtn.addEventListener("click", () => {bg.remove();
+        document.body.classList.remove("main_block")})
     cardModal.append(closeBtn);
 
     const cartSign: HTMLButtonElement = document.createElement("button");//card btn
@@ -109,6 +111,13 @@ function createModalWindow(ourCard: Cloth) {
     cardModal.append(cartSign);
 
     bg.append(cardModal);
+    bg.addEventListener("click", (event: Event) => {
+        let t = event.target as HTMLElement;
+        if (!t.classList.contains("modal-bg")) return;
+        event.stopPropagation();
+        bg.remove();
+        document.body.classList.remove("main_block")
+    })
 
     document.body.prepend(bg)
     //return bg;
@@ -118,7 +127,7 @@ function createModalWindow(ourCard: Cloth) {
 
 export function renderGenderBtns(filter: Filter) {
     const genderBtns = document.querySelectorAll(".gb")
-    genderBtns.forEach(x =>x.classList.remove("btn_pressed"))
+    genderBtns.forEach(x => x.classList.remove("btn_pressed"))
 
     genderBtns.forEach(x => {
         console.log(filter.gender)
@@ -137,6 +146,8 @@ export function renderGenderBtns(filter: Filter) {
         if (t.textContent?.includes("Man")) {
             filter.gender = ["Man"]
 
+
+
         }
         if (t.textContent?.includes("Woman")) {
             filter.gender = ["Woman"]
@@ -149,9 +160,12 @@ export function renderGenderBtns(filter: Filter) {
         renderColorBtns(filter);
         renderAdditionals(filter)
         t.classList.add("btn_pressed")
+
         await updateData(filter)
     }
 }
+
+
 
 export function renderColorBtns(filter: Filter) {
     const colorBtns = document.querySelector(".checks");
@@ -437,11 +451,11 @@ function renderSliders(filter: Filter) {
     }
 
 }
-export async function updateSlider(filter:Filter) {
+export async function updateSlider(filter: Filter) {
     sliderPrice.noUiSlider?.reset();
     sliderPrice.noUiSlider?.set([0, 5000]);
     sliderSize.noUiSlider?.reset();
-    sliderSize.noUiSlider?.set([38,56]);
+    sliderSize.noUiSlider?.set([38, 56]);
     await updateData(filter);
 
 }

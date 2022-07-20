@@ -17,15 +17,15 @@ export class Cloth {
     tie?: string;
     compl?: string;
 
-    constructor(hiddenID: string, imageURL: string, gender: string, color: string) {
+    constructor(hiddenID: string, imageURL: string, gender: string, color: string, price:number, sizes:number[], popularity:number) {
         this.hiddenID = hiddenID;
         this.imageURL = imageURL;
         this.gender = gender;
         this.color = color;
         this.carted = false;
-        this.price = this.setRandom(3500, 1000);
-        this.sizes = this.setSize([[38, 40, 42, 44, 46, 48, 50, 52, 54, 56], 2]);
-        this.popularity = this.setRandom(4, 2);
+        this.price = price;
+        this.sizes = sizes;
+        this.popularity = popularity;
         this.searchWords = this.initSearchWords();
 
     }
