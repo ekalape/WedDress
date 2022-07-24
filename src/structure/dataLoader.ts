@@ -2,7 +2,7 @@
 import { Cloth } from './cloth';
 import { Filter, ORDER } from './Filter';
 import { renderCardContainer } from './renders';
-import { data } from "./main"
+import { cartProducts, data, cartIsOpened, setCartClosed } from "./main"
 
 
 
@@ -15,9 +15,9 @@ type prod = {
     complexity: number,
     sleeves: string,
     length: string,
-    price:number,
-    popularity:number,
-    sizes:number[]
+    price: number,
+    popularity: number,
+    sizes: number[]
 }
 
 export async function createDatabase() {
@@ -46,14 +46,26 @@ export async function createDatabase() {
 
 }
 
-export async function updateData(filter: Filter) {
-    let d =  data
+export async function updateData(filter: Filter, base?: Cloth[]) {
+    let d = data
 
-    let database = [...d]
+    let database;
+    if (cartIsOpened()) {
+        database = cartProducts;
+        console.log("inside updateData>> ", cartIsOpened());        
+    }
+   
+    else {
+        database = [...d];
+        console.log("inside updateData>> ", cartIsOpened());
+    }
+console.log("inside updateData>> ",database);
 
-    database = database.filter(x =>(filter.gender && filter.gender.includes(x.gender)) && filter.colors.includes(x.color)) || database;
 
-    if ( !filter.gender.includes("Woman")) {
+    if (filter.gender.length === 0) filter.gender = ["Man", "Woman"];
+    database = database.filter(x => (filter.gender && filter.gender.includes(x.gender)) && filter.colors.includes(x.color)) || database;
+
+    if (!filter.gender.includes("Woman")) {
         if (filter.tie) { database = database.filter(x => filter.tie === x.tie) };
         if (filter.complexity) { database = database.filter(x => filter.complexity === x.compl) }
     }
@@ -82,10 +94,10 @@ export function searchByWord(words: string[]) {
     let filteredData: Cloth[] = []
     console.log(database);
 
-    for(let d of database){
+    for (let d of database) {
 
-        let s:string[] = d.searchWords;
-        if (words.every(x=> (s.some(w=>w.includes(x))))){filteredData.push(d)}
+        let s: string[] = d.searchWords;
+        if (words.every(x => (s.some(w => w.includes(x))))) { filteredData.push(d) }
 
     }
     if (filteredData.length === 0) alert("Sorry, no results found!")

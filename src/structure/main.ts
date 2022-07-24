@@ -8,14 +8,14 @@ import *as render from './renders';
 
 
 
-
-
-
 let filter: Filter;
 export let data: Cloth[];
 
 export let counter: number;
 export let cartProducts: Cloth[] = [];
+export let openedCart = false;
+
+
 const cartCounter = document.createElement("p") as HTMLParagraphElement;
 const inputField = document.querySelector(".search_bar__input") as HTMLInputElement;
 
@@ -25,13 +25,15 @@ const filterContainer = document.querySelector(".filters_menu_container") as HTM
 const filterClearBtn = document.querySelector(".clear_filters") as HTMLButtonElement;
 const filterResetBtn = document.querySelector(".reset_filters") as HTMLButtonElement;
 
-async function start() {
-    window.addEventListener("load", () => {
+const cartBtn = document.querySelector(".header__cart") as HTMLElement;
 
+async function start() {
+
+    window.addEventListener("load", () => {
+        setCartClosed()
         loadFilterFromStorage();
         loadCartFromStorage()
 
-        console.log(cartProducts);
     })
 
 
@@ -58,28 +60,33 @@ async function start() {
 
     cartCounter.classList.add("cart_counter")
     cartCounter.textContent = String(cartProducts.length);
-    document.querySelector(".header__cart")?.append(cartCounter)
+    cartBtn.append(cartCounter);
+    cartBtn.addEventListener("click", openCart)
 
     render.renderCardContainer(currentData)
-const wrapperBG = document.querySelector(".filterContainer_wrapper") as HTMLElement;
-wrapperBG.addEventListener("click", (event:Event)=>{
-let t = event.target as HTMLElement;
+    const wrapperBG = document.querySelector(".filterContainer_wrapper") as HTMLElement;
+    wrapperBG.addEventListener("click", (event: Event) => {
+        let t = event.target as HTMLElement;
 
-if(!t.classList.contains("filterContainer_wrapper"))return;
-event.stopPropagation();
-closeFilters()
+        if (!t.classList.contains("filterContainer_wrapper")) return;
+        event.stopPropagation();
+        closeFilters()
 
-})
+    })
 
     filterOpenBtn.addEventListener("click", closeFilters)
 
-    function closeFilters(){
-        if (filterContainer.classList.contains("opened")) { filterContainer.classList.remove("opened"); 
-        wrapperBG.classList.remove("fc_opened");
-    document.body.classList.remove("main_block")}
-        else {filterContainer.classList.add("opened");
-        wrapperBG.classList.add("fc_opened");
-        document.body.classList.add("main_block")}
+    function closeFilters() {
+        if (filterContainer.classList.contains("opened")) {
+            filterContainer.classList.remove("opened");
+            wrapperBG.classList.remove("fc_opened");
+            document.body.classList.remove("main_block")
+        }
+        else {
+            filterContainer.classList.add("opened");
+            wrapperBG.classList.add("fc_opened");
+            document.body.classList.add("main_block")
+        }
     }
 
     filterClearBtn.addEventListener("click", () => { localStorage.setItem("wdSavedFilter", "") })
@@ -90,6 +97,26 @@ closeFilters()
 
 start()
 
+export function cartIsOpened() {
+    return openedCart;
+};
+export function setCartClosed() {
+    openedCart = false;
+}
+
+export async function openCart() {
+ 
+    if (!openedCart) {
+        openedCart = true;
+        await updateData(filter);
+    
+    }
+    else {
+        openedCart = false;
+        await updateData(filter);
+    
+    }
+}
 
 function loadFilterFromStorage() {
     let f = localStorage.getItem("wdSavedFilter");
@@ -98,8 +125,9 @@ function loadFilterFromStorage() {
 }
 
 function loadCartFromStorage() {
+    let cp = JSON.parse(localStorage.getItem("wdSavedCart") || "[]")
+    cartProducts = cp.map((x: Cloth) => Object.setPrototypeOf(x, Cloth.prototype))
 
-    cartProducts = JSON.parse(localStorage.getItem("wdSavedCart") || "[]")
 }
 
 function saveFilterToStorage() {

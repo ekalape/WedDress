@@ -145,9 +145,6 @@ export function renderGenderBtns(filter: Filter) {
 
         if (t.textContent?.includes("Man")) {
             filter.gender = ["Man"]
-
-
-
         }
         if (t.textContent?.includes("Woman")) {
             filter.gender = ["Woman"]
