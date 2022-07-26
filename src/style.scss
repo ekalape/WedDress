@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: 0.5s;
+    transition: 0.4s;
 }
 
 @mixin btn-bordering {
@@ -565,6 +565,17 @@ hr {
     margin-top: 50px;
 }
 
+.noUi-touch-area {
+    background-color: white;
+    border: 2.5px solid black;
+    border-radius: 25%;
+    transition: 0.2s;
+    &:hover,
+    &:active {
+        border-color: var(--c-accent)
+    }
+}
+
 .sl_size::before {
     content: "- Available size range -";
     width: 100px;
@@ -663,6 +674,11 @@ footer {
         display: block;
         margin-top: 4px;
     }
+    .purposes {
+        font: var(--f-secondary);
+        font-size: 14px;
+        color: gray;
+    }
     a {
         text-decoration: none;
         font: var(--f-primary);
@@ -701,6 +717,17 @@ footer {
         top: 100px;
         right: 0;
     }
+    header {
+        .genderBtn_container {
+            justify-content: center;
+        }
+    }
+    .gender_btn {
+        border-radius: 12%/36%;
+    }
+    .search_bar {
+        width: 260px;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -712,6 +739,21 @@ footer {
         top: 100px;
         right: 0;
     }
+    header {
+        justify-content: center;
+        gap: 2%;
+    }
+    .gender_btn {
+        width: 20%;
+        border-radius: 18%/40%;
+        font-size: 14px;
+    }
+    .search_bar {
+        width: 200px;
+    }
+    .cart_btn .cartSign__text {
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -722,5 +764,16 @@ footer {
     .opened {
         top: 100px;
         right: 0;
+    }
+    .gender_btn {
+        width: 18%;
+        border-radius: 20%/42%;
+        font-size: 10px;
+    }
+    .search_bar {
+        width: 160px;
+        .search_bar__input {
+            font-size: 10px;
+        }
     }
 }
