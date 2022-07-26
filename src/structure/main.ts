@@ -30,7 +30,7 @@ const cartBtn = document.querySelector(".header__cart") as HTMLElement;
 async function start() {
 
     window.addEventListener("load", () => {
-        setCartClosed()
+       // setCartClosed()
         loadFilterFromStorage();
         loadCartFromStorage()
 
@@ -43,13 +43,11 @@ async function start() {
     window.addEventListener("beforeunload", () => { saveFilterToStorage(), saveCartToStorage() });
 
 
-    document.querySelector("header")?.addEventListener("click", () => { console.log(filter) })
+  //  document.querySelector("header")?.addEventListener("click", () => { console.log(filter) })
 
     document.querySelector(".search_bar__btn")?.addEventListener("click", search);
     inputField.addEventListener("keydown", (evt: KeyboardEvent) => {
-        if (evt.key !== "Enter") return;
-
-        console.log("white".includes("whiteee"));
+        if (evt.key !== "Enter") return;  
         search();
     })
 
@@ -90,8 +88,7 @@ async function start() {
     }
 
     filterClearBtn.addEventListener("click", () => { localStorage.setItem("wdSavedFilter", "") })
-    filterResetBtn.addEventListener("click", resetFilter)
-
+    filterResetBtn.addEventListener("click", resetFilter);
 
 }
 
@@ -135,9 +132,6 @@ function saveFilterToStorage() {
 }
 
 function saveCartToStorage() {
-
-    console.log(cartProducts);
-
     localStorage.setItem("wdSavedCart", JSON.stringify(cartProducts));
 }
 
@@ -153,7 +147,7 @@ function resetFilter() {
 
 export function addToCart(item: Cloth) {
     cartProducts.push(item);
-    console.log("added >>> ", cartProducts);
+  //  console.log("added >>> ", cartProducts);
 
     cartCounter.textContent = String(cartProducts.length)
 
@@ -171,7 +165,7 @@ export function addToCart(item: Cloth) {
 
 export function removeFromCart(item: Cloth) {
     cartProducts = cartProducts.filter(x => x.hiddenID != item.hiddenID)
-    console.log("removed >>> ", cartProducts);
+  //  console.log("removed >>> ", cartProducts);
 
     cartCounter.textContent = String(cartProducts.length)
 
@@ -180,15 +174,12 @@ export function removeFromCart(item: Cloth) {
     const oursign = allsigns.filter(x => x.dataset.hid === item.hiddenID);
     if (oursign[0]) {
         oursign[0].classList.add("inthecard_invisible");
-
-        console.log(oursign[0])
     }
 
 
 }
 
 function search() {
-
     let text = inputField.value.toLowerCase().split(/[^(a-z)]+/).filter(x => x.length != 0);
 
     console.log(text);

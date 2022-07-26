@@ -46,23 +46,23 @@ export async function createDatabase() {
 
 }
 
-export async function updateData(filter: Filter, base?: Cloth[]) {
+export async function updateData(filter: Filter) {
     let d = data
 
     let database;
     if (cartIsOpened()) {
         database = cartProducts;
-        console.log("inside updateData>> ", cartIsOpened());        
+     //   console.log("inside updateData>> ", cartIsOpened());
     }
-   
+
     else {
         database = [...d];
-        console.log("inside updateData>> ", cartIsOpened());
+     //   console.log("inside updateData>> ", cartIsOpened());
     }
-console.log("inside updateData>> ",database);
+ //   console.log("inside updateData>> ", database);
 
 
-    if (filter.gender.length === 0) filter.gender = ["Man", "Woman"];
+    if (filter.gender.length === 0 || filter.gender=== undefined) filter.gender = ["Man", "Woman"];
     database = database.filter(x => (filter.gender && filter.gender.includes(x.gender)) && filter.colors.includes(x.color)) || database;
 
     if (!filter.gender.includes("Woman")) {

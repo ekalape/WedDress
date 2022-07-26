@@ -92,8 +92,7 @@ export class Cloth {
             addProp2 = this.compl ? this.compl === "two" ? "Two pieces" : "Three pieces" : "";
             desc = `${addProp2} wedding suit`
             if (addProp1.length != 0) result.unshift(addProp1);
-            result.unshift(desc);
-            // if (addProp2.length != 0) result.unshift(addProp2);
+            result.unshift(desc);        
         }
         if (this.gender === "Woman") {
             addProp1 = this.len ? this.len[0].toUpperCase() + this.len.slice(1) : ""//0
@@ -192,8 +191,7 @@ export class Cloth {
 
         const list: HTMLElement = document.createElement("ul"); //properties container
         list.classList.add("descr_modal__list")
-        //created props
-        console.log(this.toString());
+        //created props     
         const liis = [...this.createDescription("li")]
 
         const pr = document.createElement("li");
@@ -215,28 +213,6 @@ export class Cloth {
         cardDescription.append(modalPopularity);
 
         return cardModal;
-    }
-    addToCart(): void {
-        this.carted = true;
-    }
-    removeFromCart(): void {
-        this.carted = false;
-    }
-
-
-
-    private setSize(a: [number[], number]): number[] {
-        const s = a[0];
-        const q = a[1]
-        const arr: number[] = [];
-        for (let i = 0; i < q; i++) {
-            let n = s[this.setRandom(s.length)];
-            if (!arr.includes(n)) arr.push(n);
-        }
-        return arr.sort((a, b) => a - b);
-    }
-    private setRandom(range: number, corr: number = 0) {
-        return Math.floor(Math.random() * range + corr);
     }
 
     private starsCreator(stars: number): HTMLElement {
