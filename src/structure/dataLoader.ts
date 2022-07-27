@@ -22,8 +22,8 @@ type prod = {
 
 export async function createDatabase() {
     const database: Cloth[] = []
-    const resp1 = await fetch("/src/database/man.json")
-    const resp2 = await fetch("/src/database/woman.json")
+    const resp1 = await fetch("assets/database/man.json")
+    const resp2 = await fetch("assets/database/woman.json")
 
     const menArr = await resp1.json()
     const womenArr = await resp2.json()

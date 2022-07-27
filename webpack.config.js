@@ -1,7 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebPackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ghpages = require('gh-pages');
+const CopyPlugin = require("copy-webpack-plugin");
 
 
 const devServer = (isDev) => !isDev ? {} : {
@@ -23,7 +25,8 @@ module.exports = ({ develop }) => ({
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        assetModuleFilename: "assets/[name][ext]"
+        assetModuleFilename: "assets/[name][ext]",
+        //publicPath: "assets/"
     },
     module: {
         rules: [{
@@ -55,9 +58,23 @@ module.exports = ({ develop }) => ({
     plugins: [
         new HtmlWebpackPlugin({ title: "Wedding dress shop", template: "./src/ind.html" }),
 
-        new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })
+        new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
+        new CopyPlugin({
+            patterns: [{
+                    from: "./src/assets/database",
+                    to: "assets/database"
+                },
+                {
+                    from: "./src/assets/men",
+                    to: "assets/men"
+                },
+                {
+                    from: "./src/assets/woman",
+                    to: "assets/woman"
+                }
+            ]
+        })
     ],
-
 
 
 });

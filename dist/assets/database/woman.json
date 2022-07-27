@@ -1,5 +1,5 @@
 [{
-        "imageURL": "/src/assets/woman/w-white-1.jpg",
+        "imageURL": "assets/woman/w-white-1.jpg",
         "color": "white",
         "sleeves": "without sleeves",
         "length": "long",
@@ -9,7 +9,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "/src/assets/woman/w-white-2.jpg",
+        "imageURL": "assets/woman/w-white-2.jpg",
         "color": "white",
         "sleeves": "without sleeves",
         "length": "long",
@@ -19,7 +19,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "/src/assets/woman/w-white-3.jpg",
+        "imageURL": "assets/woman/w-white-3.jpg",
         "color": "white",
         "sleeves": "with sleeves",
         "length": "long",
@@ -29,7 +29,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "/src/assets/woman/w-white-4.jpg",
+        "imageURL": "assets/woman/w-white-4.jpg",
         "color": "white",
         "sleeves": "with sleeves",
         "length": "long",
@@ -39,7 +39,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "/src/assets/woman/w-white-5.jpg",
+        "imageURL": "assets/woman/w-white-5.jpg",
         "color": "white",
         "sleeves": "with sleeves",
         "length": "long",
@@ -49,7 +49,7 @@
         "popularity": 2
     },
     {
-        "imageURL": "/src/assets/woman/w-white-6.jpg",
+        "imageURL": "assets/woman/w-white-6.jpg",
         "color": "white",
         "sleeves": "without sleeves",
         "length": "medium",
@@ -59,7 +59,7 @@
         "popularity": 1
     },
     {
-        "imageURL": "/src/assets/woman/w-white-7.jpg",
+        "imageURL": "assets/woman/w-white-7.jpg",
         "color": "white",
         "sleeves": "without sleeves",
         "length": "medium",
@@ -69,7 +69,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "/src/assets/woman/w-white-8.jpg",
+        "imageURL": "assets/woman/w-white-8.jpg",
         "color": "white",
         "sleeves": "with sleeves",
         "length": "short",
@@ -78,7 +78,7 @@
         "price": 2881,
         "popularity": 4
     }, {
-        "imageURL": "/src/assets/woman/w-blue-1.jpg",
+        "imageURL": "assets/woman/w-blue-1.jpg",
         "color": "blue",
         "sleeves": "without sleeves",
         "length": "long",
@@ -88,7 +88,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "/src/assets/woman/w-blue-2.jpg",
+        "imageURL": "assets/woman/w-blue-2.jpg",
         "color": "blue",
         "sleeves": "with sleeves",
         "length": "long",
@@ -98,7 +98,7 @@
         "popularity": 2
     },
     {
-        "imageURL": "/src/assets/woman/w-blue-3.jpg",
+        "imageURL": "assets/woman/w-blue-3.jpg",
         "color": "blue",
         "sleeves": "without sleeves",
         "length": "long",
@@ -108,7 +108,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "/src/assets/woman/w-blue-4.jpg",
+        "imageURL": "assets/woman/w-blue-4.jpg",
         "color": "blue",
         "sleeves": "without sleeves",
         "length": "short",
@@ -118,7 +118,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "/src/assets/woman/w-blue-5.jpg",
+        "imageURL": "assets/woman/w-blue-5.jpg",
         "color": "blue",
         "sleeves": "with sleeves",
         "length": "medium",
@@ -128,7 +128,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "/src/assets/woman/w-red-1.jpg",
+        "imageURL": "assets/woman/w-red-1.jpg",
         "color": "red",
         "sleeves": "without sleeves",
         "length": "long",
@@ -138,7 +138,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "/src/assets/woman/w-red-2.jpg",
+        "imageURL": "assets/woman/w-red-2.jpg",
         "color": "red",
         "sleeves": "without sleeves",
         "length": "long",
@@ -148,7 +148,7 @@
         "popularity": 2
     },
     {
-        "imageURL": "/src/assets/woman/w-red-3.jpg",
+        "imageURL": "assets/woman/w-red-3.jpg",
         "color": "red",
         "sleeves": "without sleeves",
         "length": "medium",
@@ -158,7 +158,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "/src/assets/woman/w-red-4.jpg",
+        "imageURL": "assets/woman/w-red-4.jpg",
         "color": "red",
         "sleeves": "without sleeves",
         "length": "short",
@@ -168,7 +168,7 @@
         "popularity": 2
     },
     {
-        "imageURL": "/src/assets/woman/w-yellow-1.jpg",
+        "imageURL": "assets/woman/w-yellow-1.jpg",
         "color": "yellow",
         "sleeves": "without sleeves",
         "length": "long",
@@ -178,7 +178,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "/src/assets/woman/w-yellow-2.jpg",
+        "imageURL": "assets/woman/w-yellow-2.jpg",
         "color": "yellow",
         "sleeves": "without sleeves",
         "length": "long",
@@ -188,7 +188,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "/src/assets/woman/w-yellow-3.jpg",
+        "imageURL": "assets/woman/w-yellow-3.jpg",
         "color": "yellow",
         "sleeves": "without sleeves",
         "length": "long",
@@ -198,7 +198,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "/src/assets/woman/w-yellow-4.jpg",
+        "imageURL": "assets/woman/w-yellow-4.jpg",
         "color": "yellow",
         "sleeves": "with sleeves",
         "length": "short",
@@ -208,7 +208,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "/src/assets/woman/w-yellow-5.jpg",
+        "imageURL": "assets/woman/w-yellow-5.jpg",
         "color": "yellow",
         "sleeves": "without sleeves",
         "length": "medium",

@@ -1,5 +1,5 @@
 [{
-        "imageURL": "../src/assets/men/m-black-1.jpg",
+        "imageURL": "assets/men/m-black-1.jpg",
         "color": "black",
         "tie": "bow",
         "complexity": 2,
@@ -9,7 +9,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "../src/assets/men/m-black-2.jpg",
+        "imageURL": "assets/men/m-black-2.jpg",
         "color": "black",
         "tie": "bow",
         "complexity": 2,
@@ -19,7 +19,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "../src/assets/men/m-black-3.jpg",
+        "imageURL": "assets/men/m-black-3.jpg",
         "color": "black",
         "tie": "classic",
         "complexity": 3,
@@ -29,7 +29,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "../src/assets/men/m-black-4.jpg",
+        "imageURL": "assets/men/m-black-4.jpg",
         "color": "black",
         "tie": "classic",
         "complexity": 3,
@@ -39,7 +39,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "../src/assets/men/m-black-5.jpg",
+        "imageURL": "assets/men/m-black-5.jpg",
         "color": "black",
         "tie": "none",
         "complexity": 3,
@@ -49,7 +49,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "../src/assets/men/m-black-6.jpg",
+        "imageURL": "assets/men/m-black-6.jpg",
         "color": "black",
         "tie": "bow",
         "complexity": 2,
@@ -59,7 +59,7 @@
         "popularity": 2
     },
     {
-        "imageURL": "../src/assets/men/m-black-7.jpg",
+        "imageURL": "assets/men/m-black-7.jpg",
         "color": "black",
         "tie": "classic",
         "complexity": 3,
@@ -69,7 +69,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "../src/assets/men/m-blue-1.jpg",
+        "imageURL": "assets/men/m-blue-1.jpg",
         "color": "blue",
         "tie": "classic",
         "complexity": 3,
@@ -79,7 +79,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "../src/assets/men/m-blue-2.jpg",
+        "imageURL": "assets/men/m-blue-2.jpg",
         "color": "blue",
         "tie": "classic",
         "complexity": 3,
@@ -89,7 +89,7 @@
         "popularity": 2
     },
     {
-        "imageURL": "../src/assets/men/m-blue-3.jpg",
+        "imageURL": "assets/men/m-blue-3.jpg",
         "color": "blue",
         "tie": "bow",
         "complexity": 3,
@@ -99,7 +99,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "../src/assets/men/m-blue-4.jpg",
+        "imageURL": "assets/men/m-blue-4.jpg",
         "color": "blue",
         "tie": "none",
         "complexity": 3,
@@ -109,7 +109,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "../src/assets/men/m-blue-5.jpg",
+        "imageURL": "assets/men/m-blue-5.jpg",
         "color": "blue",
         "tie": "classic",
         "complexity": 3,
@@ -119,7 +119,7 @@
         "popularity": 1
     },
     {
-        "imageURL": "../src/assets/men/m-blue-6.jpg",
+        "imageURL": "assets/men/m-blue-6.jpg",
         "color": "blue",
         "tie": "bow",
         "complexity": 2,
@@ -129,7 +129,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "../src/assets/men/m-blue-7.jpg",
+        "imageURL": "assets/men/m-blue-7.jpg",
         "color": "blue",
         "tie": "none",
         "complexity": 2,
@@ -139,7 +139,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "../src/assets/men/m-gray-1.jpg",
+        "imageURL": "assets/men/m-gray-1.jpg",
         "color": "gray",
         "tie": "classic",
         "complexity": 3,
@@ -149,7 +149,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "../src/assets/men/m-gray-2.jpg",
+        "imageURL": "assets/men/m-gray-2.jpg",
         "color": "gray",
         "tie": "none",
         "complexity": 2,
@@ -159,7 +159,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "../src/assets/men/m-gray-3.jpg",
+        "imageURL": "assets/men/m-gray-3.jpg",
         "color": "gray",
         "tie": "bow",
         "complexity": 2,
@@ -169,7 +169,7 @@
         "popularity": 4
     },
     {
-        "imageURL": "../src/assets/men/m-gray-4.jpg",
+        "imageURL": "assets/men/m-gray-4.jpg",
         "color": "gray",
         "tie": "classic",
         "complexity": 3,
@@ -179,7 +179,7 @@
         "popularity": 3
     },
     {
-        "imageURL": "../src/assets/men/m-white-1.jpg",
+        "imageURL": "assets/men/m-white-1.jpg",
         "color": "white",
         "tie": "none",
         "complexity": 2,
@@ -189,7 +189,7 @@
         "popularity": 2
     },
     {
-        "imageURL": "../src/assets/men/m-white-2.jpg",
+        "imageURL": "assets/men/m-white-2.jpg",
         "color": "white",
         "tie": "classic",
         "complexity": 2,
@@ -199,7 +199,7 @@
         "popularity": 1
     },
     {
-        "imageURL": "../src/assets/men/m-white-3.jpg",
+        "imageURL": "assets/men/m-white-3.jpg",
         "color": "white",
         "tie": "bow",
         "complexity": 2,
@@ -209,7 +209,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "../src/assets/men/m-white-4.jpg",
+        "imageURL": "assets/men/m-white-4.jpg",
         "color": "white",
         "tie": "classic",
         "complexity": 3,
@@ -219,7 +219,7 @@
         "popularity": 5
     },
     {
-        "imageURL": "../src/assets/men/m-white-5.jpg",
+        "imageURL": "assets/men/m-white-5.jpg",
         "color": "white",
         "tie": "classic",
         "complexity": 3,
@@ -229,7 +229,7 @@
         "popularity": 1
     },
     {
-        "imageURL": "../src/assets/men/m-white-6.jpg",
+        "imageURL": "assets/men/m-white-6.jpg",
         "color": "white",
         "tie": "bow",
         "complexity": 3,

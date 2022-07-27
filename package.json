@@ -3,10 +3,12 @@
     "scripts": {
         "build": "webpack",
         "dev": "webpack serve --env develop",
-        "watch": "webpack --watch"
+        "watch": "webpack --watch",
+        "deploy": "gh-pages -d dist"
     },
     "devDependencies": {
         "clean-webpack-plugin": "^4.0.0",
+        "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.7.1",
         "html-webpack-plugin": "^5.5.0",
         "mini-css-extract-plugin": "^2.6.1",
@@ -19,6 +21,7 @@
         "webpack-dev-server": "^4.9.3"
     },
     "dependencies": {
+        "gh-pages": "^4.0.0",
         "nouislider": "^15.6.0"
     }
 }
