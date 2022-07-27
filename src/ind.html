@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="shortcut icon" href="assets/star_gray.png" type="image/x-icon" />
+</head>
+
+<body>
+    <header>
+        <img class="LogoWD" src="assets/logo_WD.png" alt="Logo" />
+        <div class="genderBtn_container">
+            <button class="gender_btn gb">Woman Collection</button>
+            <button class="gender_btn gb">Man Collection</button>
+            <button class="gender_btn gb">Mixed</button>
+        </div>
+        <div class="search_bar">
+            <input type="search" class="search_bar__input" autofocus="true" placeholder="I'm looking for..." />
+            <div class="search_bar__btn"></div>
+        </div>
+        <button class="header__cart"></button>
+        <div class="cart_products"></div>
+    </header>
+    <main>
+        <div class="filterContainer_wrapper"></div>
+        <div class="filters_menu_container">
+            <div class="filters_menu">
+                <div class="filters_menu__controls">
+                    <button class="reset_filters gender_btn">Reset filters</button>
+                    <button class="clear_filters gender_btn">Clear filters</button>
+                </div>
+                <hr />
+                <div class="filters_menu__sort">
+                    <h5 class="fm_sort__title">Sort by:</h5>
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="PRICE_UP" class="sortRadio" />
+                        <label for="PRICE_UP" value="upwardPrice">price, from lesser to higher</label>
+                    </div>
+
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="PRICE_DOWN" class="sortRadio" />
+                        <label for="PRICE_UP" value="downwardPrice">price, from higher to lesser</label>
+                    </div>
+
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="POPULARITY_UP" class="sortRadio" />
+                        <label for="POPULARITY_UP" value="upwardPopularity">popularity rating, from lesser to higher</label>
+                    </div>
+
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="POPULARITY_DOWN" class="sortRadio" />
+                        <label for="POPULARITY_DOWN" value="downwardPrice">popularity rating, from higher to lesser</label>
+                    </div>
+
+                    <div class="fm_sort__wrapper">
+                        <input name="sort" type="radio" id="SHAFFLE" class="sortRadio" checked />
+                        <label for="SHAFFLE" value="shaffle">no sorting at all</label>
+                    </div>
+                </div>
+                <hr />
+                <div class="filters_menu__sliders">
+                    <div class="slider sl_size"></div>
+                    <div class="slider sl_price"></div>
+                </div>
+                <hr />
+                <div class="filters_menu__colors">
+                    <h5 class="fm_colors__title">Colors:</h5>
+                    <div class="checks"></div>
+                </div>
+                <hr />
+                <div class="filters_menu__additional"></div>
+            </div>
+            <button class="filters_open">Filters</button>
+        </div>
+
+
+        <div class="card-container"></div>
+    </main>
+    <footer>
+        <div class="left_footer">
+            <a href="https://github.com/ekalape" class="githubLink">GITHUB</a>
+            <span> © 2022</span>
+        </div>
+        <span class="purposes">- All images used only for educational and illustrative proposes -</span>
+        <a href="https://rs.school/js/" class="rsslink"><img src="assets/rs_school_js.svg" alt="rs-school" /></a>
+    </footer>
+</body>
+
+</html>
