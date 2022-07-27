@@ -583,6 +583,7 @@ hr {
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+    position: relative;
 }
 
 .noUi-touch-area {
@@ -598,11 +599,11 @@ hr {
 
 .sl_size::before {
     content: "- Available size range -";
-    width: 100px;
+    width: 150px;
     font: var(--f-secondary);
     position: absolute;
     top: -25px;
-    left: 35%;
+    left: 30%;
 }
 
 .sl_price::before {
