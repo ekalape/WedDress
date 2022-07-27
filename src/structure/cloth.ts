@@ -218,8 +218,8 @@ export class Cloth {
     private starsCreator(stars: number): HTMLElement {
         const cont = document.createElement("div");
         cont.title = `Popularity rating: ${stars} stars`
-        const validStar: string = '<img src="../src/assets/star_black.png" alt="star" class="valStar">';
-        const notStar: string = '<img src="../src/assets/star_gray.png" alt="lack of star">';
+        const validStar: string = '<img src="assets/star_black.png" alt="star" class="valStar">';
+        const notStar: string = '<img src="assets/star_gray.png" alt="lack of star">';
 
         let st = ""
 

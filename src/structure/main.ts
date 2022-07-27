@@ -27,6 +27,8 @@ const filterResetBtn = document.querySelector(".reset_filters") as HTMLButtonEle
 
 const cartBtn = document.querySelector(".header__cart") as HTMLElement;
 
+const cartTooltip = createTooltip("Click to close the cart");
+
 async function start() {
 
     window.addEventListener("load", () => {
@@ -59,7 +61,8 @@ async function start() {
     cartCounter.classList.add("cart_counter")
     cartCounter.textContent = String(cartProducts.length);
     cartBtn.append(cartCounter);
-    cartBtn.addEventListener("click", openCart)
+    cartBtn.addEventListener("click", openCart);
+    cartBtn.append(cartTooltip)
 
     render.renderCardContainer(currentData)
     const wrapperBG = document.querySelector(".filterContainer_wrapper") as HTMLElement;
@@ -106,13 +109,22 @@ export async function openCart() {
     if (!openedCart) {
         openedCart = true;
         await updateData(filter);
+        cartTooltip.style.opacity="1";
     
     }
     else {
         openedCart = false;
         await updateData(filter);
+        cartTooltip.style.opacity="0";
     
     }
+}
+
+function createTooltip(text:string):HTMLElement{
+    const tip = document.createElement("div");
+    tip.classList.add("tooltip");
+    tip.textContent=text;
+    return tip;
 }
 
 function loadFilterFromStorage() {

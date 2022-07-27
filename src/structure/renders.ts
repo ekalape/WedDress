@@ -53,7 +53,7 @@ function createModalWindow(ourCard: Cloth) {
     const cardModal: HTMLElement = ourCard.createModalWindow();
     const closeBtn: HTMLButtonElement = document.createElement("button"); //close btn
     const closeImg: HTMLImageElement = document.createElement("img");
-    closeImg.src = "/src/assets/close_black.png"
+    closeImg.src = "assets/close_black.png"
     closeImg.alt = "Close button"
     closeImg.title = "Close"
     closeBtn.classList.add("closeBtn")
@@ -70,10 +70,10 @@ function createModalWindow(ourCard: Cloth) {
     cartSign_image.classList.add("cartSign__image");
 
     if (ourCard.carted) {
-        cartSign_image.src = "/src/assets/carrello_remove_black.png"
+        cartSign_image.src = "assets/carrello_remove_black.png"
         cartSign_text.textContent = `Remove from Cart`
     } else {
-        cartSign_image.src = "/src/assets/carrello_love_black.png"
+        cartSign_image.src = "assets/carrello_love_black.png"
         cartSign_text.textContent = `Add to Cart`;
     }
 
@@ -93,14 +93,14 @@ function createModalWindow(ourCard: Cloth) {
 
 
             cartSign_text.textContent = "Remove from cart";
-            cartSign_image.src = "/src/assets/carrello_remove_black.png"
+            cartSign_image.src = "assets/carrello_remove_black.png"
             addToCart(ourCard);
             ourCard.carted = true;
 
         }
         else if (c?.includes("Remove")) {
             cartSign_text.textContent = "Add to cart";
-            cartSign_image.src = "/src/assets/carrello_love_black.png"
+            cartSign_image.src = "assets/carrello_love_black.png"
             removeFromCart(ourCard);
             ourCard.carted = false;
 

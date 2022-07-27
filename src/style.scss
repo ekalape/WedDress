@@ -68,6 +68,7 @@ header {
         border-radius: 50%;
         border: 3px solid black;
         outline: 6px solid white;
+        position: relative;
         &:hover {
             cursor: pointer;
             border-color: var(--c-accent);
@@ -90,6 +91,25 @@ header {
         text-align: center;
         font-size: 15px;
     }
+}
+
+.tooltip {
+    width: 120px;
+    height: 60px;
+    @include btn-bordering();
+    font: var(--f-primary);
+    color: var(--c-accent);
+    line-height: 20px;
+    font-size: 15px;
+    position: absolute;
+    top: -20%;
+    right: -90%;
+    border-radius: 16%/30%;
+    text-align: center;
+    padding: 8px;
+    z-index: 10;
+    opacity: 0;
+    transition: 0.2s;
 }
 
 .gender_btn {
